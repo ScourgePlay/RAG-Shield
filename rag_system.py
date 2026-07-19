@@ -57,7 +57,7 @@ def build_rag_system():
     # Step 4: Build QA chain
     logger.info("[4/4] Connecting LLM...")
     llm = ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash",
+        model="gemini-flash-latest",
         google_api_key=os.getenv("GOOGLE_API_KEY"),
         temperature=0
     )
@@ -70,10 +70,29 @@ def build_rag_system():
 
     return qa_chain
 
+def ask_question(qa_chain, question):
+    """Send a question to the RAG system and print the answer + sources."""
+    result = qa_chain.invoke({"query": question})
+    print("\nAnswer:", result["result"])
+    print("\nSources used:")
+    for i, doc in enumerate(result["source_documents"], 1):
+        print(f"  [{i}] {doc.page_content[:80].strip()}...")
+    return result
+
 
 if __name__ == "__main__":
     try:
-        build_rag_system()
+        qa_chain = build_rag_system()
     except Exception:
         logger.exception("RAG system build failed")
         raise
+
+    print("\n--- RAG System Ready. Type a question, or 'quit' to exit. ---")
+    while True:
+        question = input("\nYour question: ").strip()
+        if question.lower() in ("quit", "exit", "q"):
+            print("Goodbye.")
+            break
+        if not question:
+            continue
+        ask_question(qa_chain, question)
