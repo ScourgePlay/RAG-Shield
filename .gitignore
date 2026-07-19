@@ -2,4 +2,4 @@
 .rag-venv/
 __pycache__/
 chroma_db/
-rag_system.log/
+rag_system.log
