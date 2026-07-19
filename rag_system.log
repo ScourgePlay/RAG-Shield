@@ -1,0 +1,97 @@
+2026-07-19 13:24:15,023 [INFO] ==================================================
+2026-07-19 13:24:15,024 [INFO] Building RAG System...
+2026-07-19 13:24:15,024 [INFO] ==================================================
+2026-07-19 13:24:15,024 [INFO] [1/4] Loading document...
+2026-07-19 13:24:15,024 [INFO] Loaded 1 document(s)
+2026-07-19 13:24:15,024 [INFO] [2/4] Splitting into chunks...
+2026-07-19 13:24:15,024 [INFO] Created 4 chunks
+2026-07-19 13:24:15,024 [INFO] [3/4] Building vector database...
+2026-07-19 13:24:15,994 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/embedding-001:batchEmbedContents "HTTP/1.1 404 Not Found"
+2026-07-19 13:24:15,997 [ERROR] RAG system build failed
+Traceback (most recent call last):
+  File "/home/scrg/RAG-Shield/RAG-Shield/.rag-venv/lib/python3.12/site-packages/langchain_google_genai/embeddings.py", line 449, in embed_documents
+    result = self.client.models.embed_content(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scrg/RAG-Shield/RAG-Shield/.rag-venv/lib/python3.12/site-packages/google/genai/models.py", line 6410, in embed_content
+    return self._embed_content(model=model, contents=contents, config=config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scrg/RAG-Shield/RAG-Shield/.rag-venv/lib/python3.12/site-packages/google/genai/models.py", line 5215, in _embed_content
+    response = self._api_client.request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scrg/RAG-Shield/RAG-Shield/.rag-venv/lib/python3.12/site-packages/google/genai/_api_client.py", line 1650, in request
+    response = self._request(http_request, http_options, stream=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scrg/RAG-Shield/RAG-Shield/.rag-venv/lib/python3.12/site-packages/google/genai/_api_client.py", line 1443, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scrg/RAG-Shield/RAG-Shield/.rag-venv/lib/python3.12/site-packages/tenacity/__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scrg/RAG-Shield/RAG-Shield/.rag-venv/lib/python3.12/site-packages/tenacity/__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/scrg/RAG-Shield/RAG-Shield/.rag-venv/lib/python3.12/site-packages/tenacity/__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "/home/scrg/RAG-Shield/RAG-Shield/.rag-venv/lib/python3.12/site-packages/tenacity/__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/scrg/RAG-Shield/RAG-Shield/.rag-venv/lib/python3.12/site-packages/tenacity/__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/scrg/RAG-Shield/RAG-Shield/.rag-venv/lib/python3.12/site-packages/google/genai/_api_client.py", line 1420, in _request_once
+    errors.APIError.raise_for_response(response)
+  File "/home/scrg/RAG-Shield/RAG-Shield/.rag-venv/lib/python3.12/site-packages/google/genai/errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+  File "/home/scrg/RAG-Shield/RAG-Shield/.rag-venv/lib/python3.12/site-packages/google/genai/errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/embedding-001 is not found for API version v1beta, or is not supported for embedContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/scrg/RAG-Shield/RAG-Shield/rag_system.py", line 76, in <module>
+    build_rag_system()
+  File "/home/scrg/RAG-Shield/RAG-Shield/rag_system.py", line 50, in build_rag_system
+    vectorstore = Chroma.from_documents(
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scrg/RAG-Shield/RAG-Shield/.rag-venv/lib/python3.12/site-packages/langchain_community/vectorstores/chroma.py", line 887, in from_documents
+    return cls.from_texts(
+           ^^^^^^^^^^^^^^^
+  File "/home/scrg/RAG-Shield/RAG-Shield/.rag-venv/lib/python3.12/site-packages/langchain_community/vectorstores/chroma.py", line 843, in from_texts
+    chroma_collection.add_texts(
+  File "/home/scrg/RAG-Shield/RAG-Shield/.rag-venv/lib/python3.12/site-packages/langchain_community/vectorstores/chroma.py", line 277, in add_texts
+    embeddings = self._embedding_function.embed_documents(texts)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scrg/RAG-Shield/RAG-Shield/.rag-venv/lib/python3.12/site-packages/langchain_google_genai/embeddings.py", line 456, in embed_documents
+    raise GoogleGenerativeAIError(msg) from e
+langchain_google_genai._common.GoogleGenerativeAIError: Error embedding content (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/embedding-001 is not found for API version v1beta, or is not supported for embedContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+2026-07-19 13:26:38,887 [INFO] ==================================================
+2026-07-19 13:26:38,887 [INFO] Building RAG System...
+2026-07-19 13:26:38,887 [INFO] ==================================================
+2026-07-19 13:26:38,887 [INFO] [1/4] Loading document...
+2026-07-19 13:26:38,887 [INFO] Loaded 1 document(s)
+2026-07-19 13:26:38,887 [INFO] [2/4] Splitting into chunks...
+2026-07-19 13:26:38,888 [INFO] Created 4 chunks
+2026-07-19 13:26:38,888 [INFO] [3/4] Building vector database...
+2026-07-19 13:26:40,272 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-07-19 13:26:40,356 [INFO] Vector database created successfully
+2026-07-19 13:26:40,356 [INFO] [4/4] Connecting LLM...
+2026-07-19 13:26:40,400 [INFO] LLM connected successfully
+2026-07-19 13:28:52,023 [INFO] ==================================================
+2026-07-19 13:28:52,023 [INFO] Building RAG System...
+2026-07-19 13:28:52,023 [INFO] ==================================================
+2026-07-19 13:28:52,023 [INFO] [1/4] Loading document...
+2026-07-19 13:28:52,023 [INFO] Loaded 1 document(s)
+2026-07-19 13:28:52,024 [INFO] [2/4] Splitting into chunks...
+2026-07-19 13:28:52,024 [INFO] Created 4 chunks
+2026-07-19 13:28:52,024 [INFO] [3/4] Building vector database...
+2026-07-19 13:28:53,925 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-07-19 13:28:53,988 [INFO] Vector database created successfully
+2026-07-19 13:28:53,988 [INFO] [4/4] Connecting LLM...
+2026-07-19 13:28:54,040 [INFO] LLM connected successfully
