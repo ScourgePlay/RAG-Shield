@@ -146,3 +146,51 @@ langchain_google_genai._common.GoogleGenerativeAIError: Error embedding content 
 2026-07-19 14:17:24,041 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
 2026-07-19 14:17:24,459 [INFO] AFC is enabled with max remote calls: 10.
 2026-07-19 14:17:26,704 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 200 OK"
+2026-07-21 22:26:43,219 [INFO] ==================================================
+2026-07-21 22:26:43,219 [INFO] Building RAG System...
+2026-07-21 22:26:43,220 [INFO] ==================================================
+2026-07-21 22:26:43,220 [INFO] [1/4] Loading document...
+2026-07-21 22:26:43,220 [INFO] Loaded 1 document(s)
+2026-07-21 22:26:43,220 [INFO] [2/4] Splitting into chunks...
+2026-07-21 22:26:43,220 [INFO] Created 4 chunks
+2026-07-21 22:26:43,220 [INFO] [3/4] Building vector database...
+2026-07-21 22:26:44,961 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-07-21 22:26:45,763 [INFO] Vector database created successfully
+2026-07-21 22:26:45,764 [INFO] [4/4] Connecting LLM...
+2026-07-21 22:26:45,812 [INFO] LLM connected successfully
+2026-07-21 22:26:56,015 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-07-21 22:26:56,102 [INFO] AFC is enabled with max remote calls: 10.
+2026-07-21 22:26:59,284 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 200 OK"
+2026-07-21 22:28:15,439 [INFO] ==================================================
+2026-07-21 22:28:15,439 [INFO] Building RAG System...
+2026-07-21 22:28:15,439 [INFO] ==================================================
+2026-07-21 22:28:15,439 [INFO] [1/4] Loading document...
+2026-07-21 22:28:15,439 [INFO] Loaded 1 document(s)
+2026-07-21 22:28:15,439 [INFO] [2/4] Splitting into chunks...
+2026-07-21 22:28:15,439 [INFO] Created 4 chunks
+2026-07-21 22:28:15,440 [INFO] [3/4] Building vector database...
+2026-07-21 22:28:16,898 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-07-21 22:28:17,178 [INFO] Vector database created successfully
+2026-07-21 22:28:17,178 [INFO] [4/4] Connecting LLM...
+2026-07-21 22:28:17,222 [INFO] LLM connected successfully
+2026-07-21 22:28:20,352 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-07-21 22:28:20,423 [INFO] AFC is enabled with max remote calls: 10.
+2026-07-21 22:28:23,030 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 200 OK"
+2026-07-21 22:30:00,261 [INFO] ==================================================
+2026-07-21 22:30:00,261 [INFO] Building RAG System...
+2026-07-21 22:30:00,261 [INFO] ==================================================
+2026-07-21 22:30:00,261 [INFO] [1/4] Loading document...
+2026-07-21 22:30:00,261 [INFO] Loaded 1 document(s)
+2026-07-21 22:30:00,261 [INFO] [2/4] Splitting into chunks...
+2026-07-21 22:30:00,261 [INFO] Created 4 chunks
+2026-07-21 22:30:00,261 [INFO] [3/4] Building vector database...
+2026-07-21 22:30:02,100 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-07-21 22:30:03,020 [INFO] Vector database created successfully
+2026-07-21 22:30:03,020 [INFO] [4/4] Connecting LLM...
+2026-07-21 22:30:03,063 [INFO] LLM connected successfully
+2026-07-21 22:30:26,118 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-07-21 22:30:26,242 [INFO] AFC is enabled with max remote calls: 10.
+2026-07-21 22:30:30,587 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 200 OK"
+2026-07-21 22:36:00,616 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-07-21 22:36:00,677 [INFO] AFC is enabled with max remote calls: 10.
+2026-07-21 22:36:04,332 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 200 OK"
