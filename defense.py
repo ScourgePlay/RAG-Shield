@@ -9,8 +9,9 @@ def check_consistency(chunks, llm):
     contradict each other. Returns (is_consistent, explanation)."""
     
 # Number the chunks for easier reference
-    numbered = "\n\n".join
-    (f"Chunk {i+1}:\n{chunk}" for i, chunk in enumerate(chunks))
+    numbered = "\n\n".join(
+        f"Chunk {i+1}:\n{chunk}" for i, chunk in enumerate(chunks)
+    )
 
     prompt = (
         "You are a document consistency auditor. Below are text chunks "
@@ -25,12 +26,13 @@ def check_consistency(chunks, llm):
     )
 
     response = llm.invoke(prompt)
-    text = response.content.strip()
+    text = response.text.strip()
 
     is_consistent = "CONTRADICTION" not in text.upper()
     return is_consistent, text
 
 if __name__ == "__main__":
+    # Quick standalone test with a known contradiction
     llm = ChatGoogleGenerativeAI(
         model="gemini-flash-latest",
         google_api_key=os.getenv("GOOGLE_API_KEY"),
