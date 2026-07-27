@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+from defense import check_consistency
 import logging
 import os
 from langchain_community.document_loaders import TextLoader
@@ -19,6 +20,12 @@ logging.basicConfig(
     ],
 )
 logger = logging.getLogger(__name__)
+# This Is the LLM used for consistency checking (Auditor), separate from the main RAG system LLM 
+auditor_llm = ChatGoogleGenerativeAI(
+    model="gemini-flash-latest",
+    google_api_key=os.getenv("GOOGLE_API_KEY"),
+    temperature=0,
+)
 
 
 def build_rag_system():
@@ -73,6 +80,11 @@ def build_rag_system():
 def ask_question(qa_chain, question):
     """Send a question to the RAG system and print the answer + sources."""
     result = qa_chain.invoke({"query": question})
+    chunks_texts = [doc.page_content for doc in result["source_documents"]]
+    is_consistent, explanation = check_consistency(chunks_texts, auditor_llm)
+    if not is_consistent:
+        print("\n[!] POISONING ALERT — retrieved documents contradict each other.")
+        print(explanation)
     print("\nAnswer:", result["result"])
     print("\nSources used:")
     for i, doc in enumerate(result["source_documents"], 1):
