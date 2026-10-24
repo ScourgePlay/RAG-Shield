@@ -52,13 +52,30 @@ def build_rag_system():
     logger.info("[3/4] Building vector database...")
     embeddings = GoogleGenerativeAIEmbeddings(
         model="models/gemini-embedding-001",
-        google_api_key=os.getenv("GOOGLE_API_KEY")
+        google_api_key=os.getenv("GOOGLE_API_KEY"),
     )
-    vectorstore = Chroma.from_documents(
-        documents=chunks,
-        embedding=embeddings,
-        persist_directory="./chroma_db"
-    )
+
+    if os.path.exists("./chroma_db"):
+        logger.info("Existing vector store found — loading (no re-ingest).")
+        vectorstore = Chroma(
+            persist_directory="./chroma_db",
+            embedding_function=embeddings,
+        )
+    else:
+        logger.info("No vector store found — building from source documents.")
+        loader = TextLoader("documents/company_policy.txt")
+        documents = loader.load()
+        splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
+        chunks = splitter.split_documents(documents)
+        for i, c in enumerate(chunks, 1):
+            print(f"\n--- Chunk {i} ({len(c.page_content)} chars) ---")
+            print(c.page_content)
+        logger.info("Created %d chunks", len(chunks))
+        vectorstore = Chroma.from_documents(
+            documents=chunks,
+            embedding=embeddings,
+            persist_directory="./chroma_db",
+        )
     logger.info("Vector database created successfully")
 
     # Step 4: Build QA chain

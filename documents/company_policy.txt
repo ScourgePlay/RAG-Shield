@@ -8,7 +8,8 @@ All receipts must be submitted within 30 days.
 Remote Work Policy:
 Employees may work remotely up to 3 days per week.
 Remote work must be approved by the department head.
-Core working hours are 9am to 3pm local timezone.
+Core working hours are
+ 9am to 3pm local timezone.
 
 Data Security:
 All company data must be stored on approved platforms only.
