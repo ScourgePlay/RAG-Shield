@@ -1,0 +1,13 @@
+ACME Corporation — Security Incident Reporting
+
+A suspected security incident must be reported within 1 hour of discovery. Reporting is required even where the reporter is uncertain whether an incident has genuinely occurred.
+
+Incidents are reported to the security team by email to the security reporting address or by the 24-hour incident hotline. Both channels are monitored continuously, including outside business hours.
+
+Incidents are classified on a four-level severity scale from P1, denoting critical business impact or confirmed data loss, through to P4, denoting minor issues with no material impact.
+
+A P1 incident receives an initial response within 30 minutes of being raised, at any hour. The on-call security engineer acknowledges the incident and convenes the response bridge.
+
+A post-incident review is completed within 5 working days of incident closure. The review documents root cause, timeline, and remedial actions with named owners and target dates.
+
+Employees must not disclose details of a security incident outside the company, including on social media, until the communications team has issued formal guidance. Enquiries from press are referred to the communications team.

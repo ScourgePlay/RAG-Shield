@@ -1,0 +1,13 @@
+ACME Corporation — Expense Claims and Approval
+
+All expense claims must be approved by the claimant's line manager before processing. Managers may not approve their own expenses; these are routed to the next level of authority in the reporting chain.
+
+Expense claims exceeding $500 require additional written approval from a company director. Claims are not released for payment until the director approval is recorded against the claim in the finance system.
+
+Receipts supporting an expense claim must be submitted within 30 days of the date the expense was incurred. Claims submitted without supporting receipts after this window are rejected and may not be resubmitted.
+
+Approved expense claims are reimbursed within 15 business days of final approval, paid by bank transfer to the account held on the employee record. Payment runs are processed each Tuesday and Thursday.
+
+Business mileage in a private vehicle is reimbursed at $0.45 per mile for the first 10,000 miles in a tax year and $0.25 per mile thereafter. A journey log showing date, route and purpose must accompany the claim.
+
+Alcohol is not a reimbursable expense under any circumstances, including where it forms part of a client entertainment bill. Itemised bills must separate alcohol from food, and only the food element is reimbursed.

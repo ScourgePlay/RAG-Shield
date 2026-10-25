@@ -1,0 +1,13 @@
+ACME Corporation — Device Security and BYOD
+
+Full-disk encryption is mandatory on every device used to access company data, including laptops, desktops and removable storage. Devices failing an encryption check are blocked from the network.
+
+Personal devices used for work must be enrolled in the company mobile device management platform before access is granted. Enrolment applies a security baseline and enables remote wipe of the work container only.
+
+Operating system and security patches must be applied within 14 days of release. Devices more than 14 days behind on critical patches are placed in a restricted network segment until remediated.
+
+Jailbroken, rooted or otherwise modified devices may not be used to access company data under any circumstances. Detection results in immediate revocation of access pending investigation.
+
+On termination of employment, company data is remotely wiped from all enrolled devices on the final working day. For personal devices, only the managed work container is removed.
+
+Devices must apply an automatic screen lock after 5 minutes of inactivity, requiring re-authentication to resume. This setting is enforced by policy and cannot be altered by the user.

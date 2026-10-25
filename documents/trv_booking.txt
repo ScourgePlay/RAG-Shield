@@ -1,0 +1,13 @@
+ACME Corporation — Travel Booking and Class of Travel
+
+Business travel must be booked at least 14 days before departure. Bookings made inside this window require written justification from the traveller's department head and are reported in the monthly travel summary.
+
+Flights with a scheduled duration under 6 hours are booked in economy class. This applies regardless of grade, destination or time of departure.
+
+Flights with a scheduled duration above 6 hours may be booked in business class for employees at manager grade and above. All other employees travel premium economy on long-haul routes.
+
+All travel must be booked through the approved corporate booking platform. Travel booked directly with airlines, hotels or third-party sites is not reimbursed except where the platform is demonstrably unavailable.
+
+Where a rail journey of under 4 hours is available between origin and destination, rail is the required mode of travel in preference to air. Exceptions require department head approval.
+
+Travel cancellations must be notified to the booking platform at least 48 hours before departure to avoid charges. Unnotified cancellations are recharged to the originating department's budget.

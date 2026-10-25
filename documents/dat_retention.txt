@@ -1,0 +1,13 @@
+ACME Corporation — Data Retention Schedule
+
+Payroll records are retained for 7 years from the end of the tax year to which they relate. Retention is required for statutory audit and is not subject to early deletion requests.
+
+Customer records are retained for 6 years after the end of the customer relationship. At the end of this period records are deleted automatically unless subject to a live legal hold.
+
+CCTV footage is retained for 30 days and then overwritten automatically. Footage required for an investigation must be extracted and preserved within the retention window.
+
+Corporate email is retained for 3 years from the date of sending or receipt. Mailboxes of departed employees are preserved for the remainder of the retention period and then deleted.
+
+Recruitment records for unsuccessful candidates are retained for 12 months from the date of the hiring decision. Candidates may request earlier deletion at any point during this period.
+
+System and application logs are retained for 13 months to support security investigation and trend analysis. Logs are stored in an append-only store and cannot be edited after write.

@@ -2,11 +2,12 @@ from dotenv import load_dotenv
 from defense import check_consistency
 import logging
 import os
-from langchain_community.document_loaders import TextLoader
+from langchain_community.document_loaders import DirectoryLoader, TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain_classic.chains import RetrievalQA
+from langchain_huggingface import HuggingFaceEmbeddings
 
 
 load_dotenv()
@@ -34,25 +35,24 @@ def build_rag_system():
     logger.info("=" * 50)
 
     # Step 1: Load document
-    logger.info("[1/4] Loading document...")
-    loader = TextLoader("documents/company_policy.txt")
-    documents = loader.load()
-    logger.info("Loaded %d document(s)", len(documents))
+    # logger.info("[1/4] Loading document...")
+    # loader = TextLoader("documents/company_policy.txt")
+    # documents = loader.load()
+    # logger.info("Loaded %d document(s)", len(documents))
 
-    # Step 2: Split into chunks
-    logger.info("[2/4] Splitting into chunks...")
-    splitter = RecursiveCharacterTextSplitter(
-        chunk_size=200,
-        chunk_overlap=50
-    )
-    chunks = splitter.split_documents(documents)
-    logger.info("Created %d chunks", len(chunks))
+    # # Step 2: Split into chunks
+    # logger.info("[2/4] Splitting into chunks...")
+    # splitter = RecursiveCharacterTextSplitter(
+    #     chunk_size=200,
+    #     chunk_overlap=50
+    # )
+    # chunks = splitter.split_documents(documents)
+    # logger.info("Created %d chunks", len(chunks))
 
     # Step 3: Store in vector database
     logger.info("[3/4] Building vector database...")
-    embeddings = GoogleGenerativeAIEmbeddings(
-        model="models/gemini-embedding-001",
-        google_api_key=os.getenv("GOOGLE_API_KEY"),
+    embeddings = HuggingFaceEmbeddings(
+        model_name="sentence-transformers/all-MiniLM-L6-v2"
     )
 
     if os.path.exists("./chroma_db"):
@@ -63,9 +63,13 @@ def build_rag_system():
         )
     else:
         logger.info("No vector store found — building from source documents.")
-        loader = TextLoader("documents/company_policy.txt")
+        loader = DirectoryLoader(
+            "documents",
+            glob="*.txt",
+            loader_cls=TextLoader,
+        )
         documents = loader.load()
-        splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
+        splitter = RecursiveCharacterTextSplitter(chunk_size=300, chunk_overlap=50)
         chunks = splitter.split_documents(documents)
         for i, c in enumerate(chunks, 1):
             print(f"\n--- Chunk {i} ({len(c.page_content)} chars) ---")

@@ -1,0 +1,13 @@
+ACME Corporation — Data Subject Requests and Deletion
+
+A data subject access request must receive a substantive response within 30 calendar days of receipt. The clock starts on the date the request is received, not the date it is assigned.
+
+Where a request is complex or involves multiple systems, the response period may be extended by a further 60 days. The data subject must be informed of the extension and its reason within the original 30-day window.
+
+The identity of the requester must be verified before any personal data is disclosed. Verification uses two independent identifiers and is recorded against the request file.
+
+No fee is charged for a first data subject access request. A reasonable administrative fee may be applied to repeat requests from the same individual within a 6-month period.
+
+Approved deletion requests are executed within 30 days of approval across all production systems and backups scheduled for the next rotation. A deletion certificate is issued to the requester.
+
+Any request that cannot be fulfilled within the standard process is escalated to the Data Protection Officer for decision. The Officer's determination is recorded with reasons in the request file.

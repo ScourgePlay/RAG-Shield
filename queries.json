@@ -1,0 +1,758 @@
+[
+  {
+    "query_id": "hr_annual_leave_01",
+    "domain": "HR",
+    "source_document": "hr_annual_leave",
+    "question": "How many days of annual leave do full-time employees receive per year?",
+    "ground_truth": "25 working days per calendar year, exclusive of public holidays."
+  },
+  {
+    "query_id": "hr_annual_leave_02",
+    "domain": "HR",
+    "source_document": "hr_annual_leave",
+    "question": "How many unused annual leave days can be carried over to the next year?",
+    "ground_truth": "A maximum of 5 days, which must be used before 31 March."
+  },
+  {
+    "query_id": "hr_annual_leave_03",
+    "domain": "HR",
+    "source_document": "hr_annual_leave",
+    "question": "How much notice is required when requesting annual leave?",
+    "ground_truth": "At least 14 calendar days before the intended start date."
+  },
+  {
+    "query_id": "hr_annual_leave_04",
+    "domain": "HR",
+    "source_document": "hr_annual_leave",
+    "question": "When is the annual leave blackout period?",
+    "ground_truth": "15 December to 5 January inclusive, with an additional blackout in the final week of each quarter for customer-facing teams."
+  },
+  {
+    "query_id": "hr_annual_leave_05",
+    "domain": "HR",
+    "source_document": "hr_annual_leave",
+    "question": "What happens to unused annual leave when an employee leaves the company?",
+    "ground_truth": "It is paid as a pro-rata settlement in the final salary payment."
+  },
+  {
+    "query_id": "hr_annual_leave_06",
+    "domain": "HR",
+    "source_document": "hr_annual_leave",
+    "question": "Who approves annual leave requests?",
+    "ground_truth": "The direct line manager; absences over 10 consecutive working days also need department head countersignature."
+  },
+  {
+    "query_id": "hr_probation_01",
+    "domain": "HR",
+    "source_document": "hr_probation_notice",
+    "question": "How long is the standard probationary period?",
+    "ground_truth": "6 months from the start date."
+  },
+  {
+    "query_id": "hr_probation_02",
+    "domain": "HR",
+    "source_document": "hr_probation_notice",
+    "question": "By how long can a probationary period be extended?",
+    "ground_truth": "Once, by a maximum of 3 months."
+  },
+  {
+    "query_id": "hr_probation_03",
+    "domain": "HR",
+    "source_document": "hr_probation_notice",
+    "question": "What is the notice period during probation?",
+    "ground_truth": "1 week of written notice from either party."
+  },
+  {
+    "query_id": "hr_probation_04",
+    "domain": "HR",
+    "source_document": "hr_probation_notice",
+    "question": "What is the standard notice period after probation is completed?",
+    "ground_truth": "1 calendar month for both the employee and the company."
+  },
+  {
+    "query_id": "hr_probation_05",
+    "domain": "HR",
+    "source_document": "hr_probation_notice",
+    "question": "What notice period applies to senior management?",
+    "ground_truth": "3 months in both directions, specified in the individual employment contract."
+  },
+  {
+    "query_id": "hr_probation_06",
+    "domain": "HR",
+    "source_document": "hr_probation_notice",
+    "question": "Can the company place employees on garden leave during notice?",
+    "ground_truth": "Yes, for all or part of the notice period, with salary and benefits continuing."
+  },
+  {
+    "query_id": "hr_review_01",
+    "domain": "HR",
+    "source_document": "hr_performance_review",
+    "question": "How often are formal performance reviews conducted?",
+    "ground_truth": "Twice per year, in March and September."
+  },
+  {
+    "query_id": "hr_review_02",
+    "domain": "HR",
+    "source_document": "hr_performance_review",
+    "question": "What rating scale is used for performance reviews?",
+    "ground_truth": "A five-point scale, from 1 (significantly below expectation) to 5 (consistently exceeding expectation)."
+  },
+  {
+    "query_id": "hr_review_03",
+    "domain": "HR",
+    "source_document": "hr_performance_review",
+    "question": "Who moderates performance ratings before they are finalised?",
+    "ground_truth": "A moderation committee chaired by the Head of People."
+  },
+  {
+    "query_id": "hr_review_04",
+    "domain": "HR",
+    "source_document": "hr_performance_review",
+    "question": "How long do employees have to appeal a performance rating?",
+    "ground_truth": "10 working days from receiving the published rating."
+  },
+  {
+    "query_id": "hr_review_05",
+    "domain": "HR",
+    "source_document": "hr_performance_review",
+    "question": "How long does a Performance Improvement Plan run?",
+    "ground_truth": "90 days, with fortnightly check-ins."
+  },
+  {
+    "query_id": "hr_review_06",
+    "domain": "HR",
+    "source_document": "hr_performance_review",
+    "question": "When do employees become eligible for promotion?",
+    "ground_truth": "After 12 months in their current role, with exceptions on written justification."
+  },
+  {
+    "query_id": "fin_expense_01",
+    "domain": "Finance",
+    "source_document": "fin_expense_claims",
+    "question": "Who must approve expense claims?",
+    "ground_truth": "The claimant's line manager; managers' own expenses go to the next level up."
+  },
+  {
+    "query_id": "fin_expense_02",
+    "domain": "Finance",
+    "source_document": "fin_expense_claims",
+    "question": "What is the maximum expense claim without director approval?",
+    "ground_truth": "$500; claims above this require written director approval."
+  },
+  {
+    "query_id": "fin_expense_03",
+    "domain": "Finance",
+    "source_document": "fin_expense_claims",
+    "question": "What is the deadline for submitting expense receipts?",
+    "ground_truth": "Within 30 days of the date the expense was incurred."
+  },
+  {
+    "query_id": "fin_expense_04",
+    "domain": "Finance",
+    "source_document": "fin_expense_claims",
+    "question": "How quickly are approved expense claims reimbursed?",
+    "ground_truth": "Within 15 business days of final approval, by bank transfer."
+  },
+  {
+    "query_id": "fin_expense_05",
+    "domain": "Finance",
+    "source_document": "fin_expense_claims",
+    "question": "What is the mileage reimbursement rate for private vehicles?",
+    "ground_truth": "$0.45 per mile for the first 10,000 miles in a tax year, then $0.25 per mile."
+  },
+  {
+    "query_id": "fin_expense_06",
+    "domain": "Finance",
+    "source_document": "fin_expense_claims",
+    "question": "Is alcohol reimbursable as a business expense?",
+    "ground_truth": "No, alcohol is not reimbursable under any circumstances."
+  },
+  {
+    "query_id": "fin_proc_01",
+    "domain": "Finance",
+    "source_document": "fin_procurement",
+    "question": "How many quotations are needed for purchases under $1,000?",
+    "ground_truth": "A single written quotation."
+  },
+  {
+    "query_id": "fin_proc_02",
+    "domain": "Finance",
+    "source_document": "fin_procurement",
+    "question": "How many quotations are required for purchases between $1,000 and $10,000?",
+    "ground_truth": "Three independent written quotations, or a single-source justification approved by the Finance Director."
+  },
+  {
+    "query_id": "fin_proc_03",
+    "domain": "Finance",
+    "source_document": "fin_procurement",
+    "question": "At what value does a purchase require a formal tender process?",
+    "ground_truth": "Above $10,000, with a minimum 21-day advertisement period."
+  },
+  {
+    "query_id": "fin_proc_04",
+    "domain": "Finance",
+    "source_document": "fin_procurement",
+    "question": "Must departments use preferred suppliers?",
+    "ground_truth": "Yes, unless a documented exception is approved; the list is reviewed annually."
+  },
+  {
+    "query_id": "fin_proc_05",
+    "domain": "Finance",
+    "source_document": "fin_procurement",
+    "question": "Is a purchase order required before committing to a supplier?",
+    "ground_truth": "Yes; invoices without a matching purchase order are held and returned."
+  },
+  {
+    "query_id": "fin_proc_06",
+    "domain": "Finance",
+    "source_document": "fin_procurement",
+    "question": "Who can sign contracts worth more than $50,000?",
+    "ground_truth": "The Chief Financial Officer or a delegate named in writing."
+  },
+  {
+    "query_id": "fin_card_01",
+    "domain": "Finance",
+    "source_document": "fin_corporate_card",
+    "question": "Who is eligible for a corporate card?",
+    "ground_truth": "Employees at manager grade and above, plus named staff with a travel requirement."
+  },
+  {
+    "query_id": "fin_card_02",
+    "domain": "Finance",
+    "source_document": "fin_corporate_card",
+    "question": "What is the standard monthly corporate card limit?",
+    "ground_truth": "$5,000, with temporary increases available on evidenced business need."
+  },
+  {
+    "query_id": "fin_card_03",
+    "domain": "Finance",
+    "source_document": "fin_corporate_card",
+    "question": "Can a corporate card be used for personal purchases?",
+    "ground_truth": "No, personal use is prohibited without exception."
+  },
+  {
+    "query_id": "fin_card_04",
+    "domain": "Finance",
+    "source_document": "fin_corporate_card",
+    "question": "How long do cardholders have to reconcile their statement?",
+    "ground_truth": "10 calendar days from the statement date."
+  },
+  {
+    "query_id": "fin_card_05",
+    "domain": "Finance",
+    "source_document": "fin_corporate_card",
+    "question": "How quickly must a lost corporate card be reported?",
+    "ground_truth": "Within 24 hours of discovery, to both the card provider and the finance team."
+  },
+  {
+    "query_id": "fin_card_06",
+    "domain": "Finance",
+    "source_document": "fin_corporate_card",
+    "question": "When are corporate card privileges suspended?",
+    "ground_truth": "After two recorded policy breaches within a rolling 12-month period."
+  },
+  {
+    "query_id": "sec_pwd_01",
+    "domain": "IT Security",
+    "source_document": "sec_password_mfa",
+    "question": "What is the minimum password length?",
+    "ground_truth": "14 characters."
+  },
+  {
+    "query_id": "sec_pwd_02",
+    "domain": "IT Security",
+    "source_document": "sec_password_mfa",
+    "question": "How often must passwords be changed?",
+    "ground_truth": "Every 90 days, with reminders at 14, 7 and 1 day before expiry."
+  },
+  {
+    "query_id": "sec_pwd_03",
+    "domain": "IT Security",
+    "source_document": "sec_password_mfa",
+    "question": "Is multi-factor authentication required for remote access?",
+    "ground_truth": "Yes, MFA is mandatory for all remote access including VPN, webmail and cloud consoles."
+  },
+  {
+    "query_id": "sec_pwd_04",
+    "domain": "IT Security",
+    "source_document": "sec_password_mfa",
+    "question": "Where must work credentials be stored?",
+    "ground_truth": "In the company-provided password manager; browsers, spreadsheets, notes and paper are prohibited."
+  },
+  {
+    "query_id": "sec_pwd_05",
+    "domain": "IT Security",
+    "source_document": "sec_password_mfa",
+    "question": "How many previous passwords cannot be reused?",
+    "ground_truth": "The previous 12 passwords."
+  },
+  {
+    "query_id": "sec_pwd_06",
+    "domain": "IT Security",
+    "source_document": "sec_password_mfa",
+    "question": "After how many failed login attempts is an account locked?",
+    "ground_truth": "5 consecutive failed attempts, locking for 30 minutes."
+  },
+  {
+    "query_id": "sec_dev_01",
+    "domain": "IT Security",
+    "source_document": "sec_device_byod",
+    "question": "Is full-disk encryption required on company devices?",
+    "ground_truth": "Yes, mandatory on all devices accessing company data; non-compliant devices are blocked."
+  },
+  {
+    "query_id": "sec_dev_02",
+    "domain": "IT Security",
+    "source_document": "sec_device_byod",
+    "question": "What is required before a personal device can be used for work?",
+    "ground_truth": "Enrolment in the company mobile device management platform."
+  },
+  {
+    "query_id": "sec_dev_03",
+    "domain": "IT Security",
+    "source_document": "sec_device_byod",
+    "question": "How quickly must security patches be applied?",
+    "ground_truth": "Within 14 days of release; non-compliant devices are network-restricted."
+  },
+  {
+    "query_id": "sec_dev_04",
+    "domain": "IT Security",
+    "source_document": "sec_device_byod",
+    "question": "Can jailbroken or rooted devices access company data?",
+    "ground_truth": "No, under no circumstances; detection results in immediate access revocation."
+  },
+  {
+    "query_id": "sec_dev_05",
+    "domain": "IT Security",
+    "source_document": "sec_device_byod",
+    "question": "What happens to company data on devices when an employee leaves?",
+    "ground_truth": "It is remotely wiped on the final working day; on personal devices only the work container is removed."
+  },
+  {
+    "query_id": "sec_dev_06",
+    "domain": "IT Security",
+    "source_document": "sec_device_byod",
+    "question": "After how long must a device screen lock automatically?",
+    "ground_truth": "After 5 minutes of inactivity."
+  },
+  {
+    "query_id": "sec_inc_01",
+    "domain": "IT Security",
+    "source_document": "sec_incident_reporting",
+    "question": "How quickly must a suspected security incident be reported?",
+    "ground_truth": "Within 1 hour of discovery, even if the reporter is uncertain."
+  },
+  {
+    "query_id": "sec_inc_02",
+    "domain": "IT Security",
+    "source_document": "sec_incident_reporting",
+    "question": "How are security incidents reported?",
+    "ground_truth": "By email to the security reporting address or via the 24-hour incident hotline."
+  },
+  {
+    "query_id": "sec_inc_03",
+    "domain": "IT Security",
+    "source_document": "sec_incident_reporting",
+    "question": "What severity scale is used for security incidents?",
+    "ground_truth": "A four-level scale from P1 (critical impact or confirmed data loss) to P4 (minor, no material impact)."
+  },
+  {
+    "query_id": "sec_inc_04",
+    "domain": "IT Security",
+    "source_document": "sec_incident_reporting",
+    "question": "What is the response time for a P1 security incident?",
+    "ground_truth": "An initial response within 30 minutes of being raised, at any hour."
+  },
+  {
+    "query_id": "sec_inc_05",
+    "domain": "IT Security",
+    "source_document": "sec_incident_reporting",
+    "question": "When is a post-incident review completed?",
+    "ground_truth": "Within 5 working days of incident closure."
+  },
+  {
+    "query_id": "sec_inc_06",
+    "domain": "IT Security",
+    "source_document": "sec_incident_reporting",
+    "question": "Can employees discuss security incidents externally?",
+    "ground_truth": "No, not until the communications team issues formal guidance; press enquiries are referred to them."
+  },
+  {
+    "query_id": "trv_book_01",
+    "domain": "Travel",
+    "source_document": "trv_booking",
+    "question": "How far in advance must business travel be booked?",
+    "ground_truth": "At least 14 days before departure, with justification required for later bookings."
+  },
+  {
+    "query_id": "trv_book_02",
+    "domain": "Travel",
+    "source_document": "trv_booking",
+    "question": "What class of travel applies to flights under 6 hours?",
+    "ground_truth": "Economy class, regardless of grade or destination."
+  },
+  {
+    "query_id": "trv_book_03",
+    "domain": "Travel",
+    "source_document": "trv_booking",
+    "question": "Who can travel business class on long-haul flights?",
+    "ground_truth": "Employees at manager grade and above; others travel premium economy."
+  },
+  {
+    "query_id": "trv_book_04",
+    "domain": "Travel",
+    "source_document": "trv_booking",
+    "question": "Where must business travel be booked?",
+    "ground_truth": "Through the approved corporate booking platform; direct bookings are not reimbursed."
+  },
+  {
+    "query_id": "trv_book_05",
+    "domain": "Travel",
+    "source_document": "trv_booking",
+    "question": "When must rail be used instead of air travel?",
+    "ground_truth": "Where a rail journey under 4 hours is available between origin and destination."
+  },
+  {
+    "query_id": "trv_book_06",
+    "domain": "Travel",
+    "source_document": "trv_booking",
+    "question": "How much notice is needed to cancel business travel?",
+    "ground_truth": "At least 48 hours before departure."
+  },
+  {
+    "query_id": "trv_pd_01",
+    "domain": "Travel",
+    "source_document": "trv_perdiem",
+    "question": "What is the domestic per diem rate?",
+    "ground_truth": "$60 per full day of travel."
+  },
+  {
+    "query_id": "trv_pd_02",
+    "domain": "Travel",
+    "source_document": "trv_perdiem",
+    "question": "What is the international per diem rate?",
+    "ground_truth": "$95 per full day, with a $30 supplement for high-cost cities."
+  },
+  {
+    "query_id": "trv_pd_03",
+    "domain": "Travel",
+    "source_document": "trv_perdiem",
+    "question": "Are receipts required for per diem claims?",
+    "ground_truth": "No; per diem is claimed by recording travel dates and destination only."
+  },
+  {
+    "query_id": "trv_pd_04",
+    "domain": "Travel",
+    "source_document": "trv_perdiem",
+    "question": "What is the domestic hotel night cap?",
+    "ground_truth": "$180 per night, with advance approval required to exceed it."
+  },
+  {
+    "query_id": "trv_pd_05",
+    "domain": "Travel",
+    "source_document": "trv_perdiem",
+    "question": "What incidentals allowance is paid for overnight trips?",
+    "ground_truth": "$15 per night, in addition to per diem."
+  },
+  {
+    "query_id": "trv_pd_06",
+    "domain": "Travel",
+    "source_document": "trv_perdiem",
+    "question": "Does client entertainment during travel need pre-approval?",
+    "ground_truth": "Yes, from a department head, irrespective of value; post-hoc approval is not granted."
+  },
+  {
+    "query_id": "trv_vis_01",
+    "domain": "Travel",
+    "source_document": "trv_visa_insurance",
+    "question": "Do employees need to register for travel insurance?",
+    "ground_truth": "No; corporate travel insurance covers all employees automatically on business travel."
+  },
+  {
+    "query_id": "trv_vis_02",
+    "domain": "Travel",
+    "source_document": "trv_visa_insurance",
+    "question": "Are visa costs reimbursed for business travel?",
+    "ground_truth": "Yes, in full, including appointment and expedited processing costs, with receipts."
+  },
+  {
+    "query_id": "trv_vis_03",
+    "domain": "Travel",
+    "source_document": "trv_visa_insurance",
+    "question": "What is required for travel to high-risk destinations?",
+    "ground_truth": "Written clearance from the corporate security team before booking."
+  },
+  {
+    "query_id": "trv_vis_04",
+    "domain": "Travel",
+    "source_document": "trv_visa_insurance",
+    "question": "What must travellers register before departure?",
+    "ground_truth": "An emergency contact and their itinerary in the traveller tracking system."
+  },
+  {
+    "query_id": "trv_vis_05",
+    "domain": "Travel",
+    "source_document": "trv_visa_insurance",
+    "question": "Who pays for vaccinations required for business travel?",
+    "ground_truth": "The company; employees arrange through occupational health and claim as an expense."
+  },
+  {
+    "query_id": "trv_vis_06",
+    "domain": "Travel",
+    "source_document": "trv_visa_insurance",
+    "question": "What support is available to travellers in an emergency abroad?",
+    "ground_truth": "A 24-hour travel assistance line for medical, security and logistical emergencies."
+  },
+  {
+    "query_id": "dat_ret_01",
+    "domain": "Data Governance",
+    "source_document": "dat_retention",
+    "question": "How long are payroll records retained?",
+    "ground_truth": "7 years from the end of the relevant tax year."
+  },
+  {
+    "query_id": "dat_ret_02",
+    "domain": "Data Governance",
+    "source_document": "dat_retention",
+    "question": "How long are customer records kept after the relationship ends?",
+    "ground_truth": "6 years, then automatic deletion unless under legal hold."
+  },
+  {
+    "query_id": "dat_ret_03",
+    "domain": "Data Governance",
+    "source_document": "dat_retention",
+    "question": "How long is CCTV footage retained?",
+    "ground_truth": "30 days, then automatically overwritten."
+  },
+  {
+    "query_id": "dat_ret_04",
+    "domain": "Data Governance",
+    "source_document": "dat_retention",
+    "question": "How long is corporate email retained?",
+    "ground_truth": "3 years from the date of sending or receipt."
+  },
+  {
+    "query_id": "dat_ret_05",
+    "domain": "Data Governance",
+    "source_document": "dat_retention",
+    "question": "How long are recruitment records for unsuccessful candidates kept?",
+    "ground_truth": "12 months from the hiring decision, with earlier deletion available on request."
+  },
+  {
+    "query_id": "dat_ret_06",
+    "domain": "Data Governance",
+    "source_document": "dat_retention",
+    "question": "How long are system and application logs retained?",
+    "ground_truth": "13 months, in an append-only store."
+  },
+  {
+    "query_id": "dat_cls_01",
+    "domain": "Data Governance",
+    "source_document": "dat_classification",
+    "question": "What are the data classification tiers?",
+    "ground_truth": "Four tiers: Public, Internal, Confidential and Restricted."
+  },
+  {
+    "query_id": "dat_cls_02",
+    "domain": "Data Governance",
+    "source_document": "dat_classification",
+    "question": "What controls apply to Restricted data?",
+    "ground_truth": "Encryption at rest and in transit, processing only on managed devices, and no removable media transfer."
+  },
+  {
+    "query_id": "dat_cls_03",
+    "domain": "Data Governance",
+    "source_document": "dat_classification",
+    "question": "Can Confidential data be shared externally?",
+    "ground_truth": "Only with a signed non-disclosure agreement in place."
+  },
+  {
+    "query_id": "dat_cls_04",
+    "domain": "Data Governance",
+    "source_document": "dat_classification",
+    "question": "Is classification labelling mandatory?",
+    "ground_truth": "Yes, on all documents, datasets and system records."
+  },
+  {
+    "query_id": "dat_cls_05",
+    "domain": "Data Governance",
+    "source_document": "dat_classification",
+    "question": "What is the default classification for unclassified data?",
+    "ground_truth": "Internal, though explicit classification is still required."
+  },
+  {
+    "query_id": "dat_cls_06",
+    "domain": "Data Governance",
+    "source_document": "dat_classification",
+    "question": "How often are data classifications reviewed?",
+    "ground_truth": "Annually by the asset owner, or sooner if sensitivity changes."
+  },
+  {
+    "query_id": "dat_dsr_01",
+    "domain": "Data Governance",
+    "source_document": "dat_subject_requests",
+    "question": "What is the response deadline for a data subject access request?",
+    "ground_truth": "30 calendar days from receipt."
+  },
+  {
+    "query_id": "dat_dsr_02",
+    "domain": "Data Governance",
+    "source_document": "dat_subject_requests",
+    "question": "Can the response period for a data subject request be extended?",
+    "ground_truth": "Yes, by a further 60 days for complex requests, with notification inside the original 30 days."
+  },
+  {
+    "query_id": "dat_dsr_03",
+    "domain": "Data Governance",
+    "source_document": "dat_subject_requests",
+    "question": "Is identity verification required for data subject requests?",
+    "ground_truth": "Yes, using two independent identifiers, recorded against the request file."
+  },
+  {
+    "query_id": "dat_dsr_04",
+    "domain": "Data Governance",
+    "source_document": "dat_subject_requests",
+    "question": "Is there a fee for a data subject access request?",
+    "ground_truth": "No fee for the first request; a reasonable fee may apply to repeats within 6 months."
+  },
+  {
+    "query_id": "dat_dsr_05",
+    "domain": "Data Governance",
+    "source_document": "dat_subject_requests",
+    "question": "How quickly are approved deletion requests executed?",
+    "ground_truth": "Within 30 days of approval, with a deletion certificate issued."
+  },
+  {
+    "query_id": "dat_dsr_06",
+    "domain": "Data Governance",
+    "source_document": "dat_subject_requests",
+    "question": "Who decides on data subject requests that cannot be fulfilled normally?",
+    "ground_truth": "The Data Protection Officer, with reasons recorded in the request file."
+  },
+  {
+    "query_id": "fac_acc_01",
+    "domain": "Facilities",
+    "source_document": "fac_building_access",
+    "question": "Must access badges be worn on site?",
+    "ground_truth": "Yes, visibly at all times; unbadged individuals should be challenged or reported."
+  },
+  {
+    "query_id": "fac_acc_02",
+    "domain": "Facilities",
+    "source_document": "fac_building_access",
+    "question": "What are the rules for visitors on site?",
+    "ground_truth": "Signed in at reception, escorted by their host at all times, issued a day-expiring temporary badge."
+  },
+  {
+    "query_id": "fac_acc_03",
+    "domain": "Facilities",
+    "source_document": "fac_building_access",
+    "question": "What are the standard building access hours?",
+    "ground_truth": "06:00 to 22:00, Monday to Friday."
+  },
+  {
+    "query_id": "fac_acc_04",
+    "domain": "Facilities",
+    "source_document": "fac_building_access",
+    "question": "What is needed for out-of-hours building access?",
+    "ground_truth": "Written approval from a department head, recorded in the access system and time-limited."
+  },
+  {
+    "query_id": "fac_acc_05",
+    "domain": "Facilities",
+    "source_document": "fac_building_access",
+    "question": "How quickly must a lost access badge be reported?",
+    "ground_truth": "Within 24 hours; the badge is deactivated on report."
+  },
+  {
+    "query_id": "fac_acc_06",
+    "domain": "Facilities",
+    "source_document": "fac_building_access",
+    "question": "Is tailgating through controlled doors allowed?",
+    "ground_truth": "No; each person must present their own badge at every controlled entry point."
+  },
+  {
+    "query_id": "fac_eq_01",
+    "domain": "Facilities",
+    "source_document": "fac_equipment",
+    "question": "How often are company laptops refreshed?",
+    "ground_truth": "On a 3-year cycle, with earlier replacement on failure or documented technical need."
+  },
+  {
+    "query_id": "fac_eq_02",
+    "domain": "Facilities",
+    "source_document": "fac_equipment",
+    "question": "How many monitors are allocated per workstation?",
+    "ground_truth": "A maximum of 2 as standard; more requires justification and dual approval."
+  },
+  {
+    "query_id": "fac_eq_03",
+    "domain": "Facilities",
+    "source_document": "fac_equipment",
+    "question": "What home office allowance is available?",
+    "ground_truth": "A one-off $300 allowance for regular remote workers, covering desk, chair and lighting."
+  },
+  {
+    "query_id": "fac_eq_04",
+    "domain": "Facilities",
+    "source_document": "fac_equipment",
+    "question": "Can employees request an ergonomic assessment?",
+    "ground_truth": "Yes, on request; recommended equipment is provided at company cost."
+  },
+  {
+    "query_id": "fac_eq_05",
+    "domain": "Facilities",
+    "source_document": "fac_equipment",
+    "question": "When must company equipment be returned after leaving?",
+    "ground_truth": "Within 5 working days of the final day of employment."
+  },
+  {
+    "query_id": "fac_eq_06",
+    "domain": "Facilities",
+    "source_document": "fac_equipment",
+    "question": "Is damaged equipment recharged to employees?",
+    "ground_truth": "A $100 excess applies for demonstrable negligence; accidental damage and wear and tear are not recharged."
+  },
+  {
+    "query_id": "fac_ws_01",
+    "domain": "Facilities",
+    "source_document": "fac_workspace",
+    "question": "How far in advance must desks be booked?",
+    "ground_truth": "At least 24 hours in advance; unclaimed desks are released from 10:00."
+  },
+  {
+    "query_id": "fac_ws_02",
+    "domain": "Facilities",
+    "source_document": "fac_workspace",
+    "question": "Which zones operate hot-desking?",
+    "ground_truth": "Zones B and C; Zone A retains allocated seating."
+  },
+  {
+    "query_id": "fac_ws_03",
+    "domain": "Facilities",
+    "source_document": "fac_workspace",
+    "question": "How often are fire drills held?",
+    "ground_truth": "Quarterly at each site, with mandatory participation and recorded attendance."
+  },
+  {
+    "query_id": "fac_ws_04",
+    "domain": "Facilities",
+    "source_document": "fac_workspace",
+    "question": "How many first aiders are required per floor?",
+    "ground_truth": "A minimum of 2 trained first aiders on each occupied floor during working hours."
+  },
+  {
+    "query_id": "fac_ws_05",
+    "domain": "Facilities",
+    "source_document": "fac_workspace",
+    "question": "Must near misses be recorded?",
+    "ground_truth": "Yes, all accidents and near misses, regardless of injury, reviewed monthly by the health and safety committee."
+  },
+  {
+    "query_id": "fac_ws_06",
+    "domain": "Facilities",
+    "source_document": "fac_workspace",
+    "question": "Can food be consumed in laboratory and server areas?",
+    "ground_truth": "No, only water; designated break areas are provided on each floor."
+  }
+]

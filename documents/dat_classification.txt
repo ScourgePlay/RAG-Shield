@@ -1,0 +1,13 @@
+ACME Corporation — Data Classification Standard
+
+The company operates four data classification tiers: Public, Internal, Confidential and Restricted. Every data asset must carry exactly one classification at any given time.
+
+Data classified as Restricted must be encrypted both at rest and in transit, and may only be processed on managed company devices. Transfer to removable media is blocked by policy.
+
+Confidential data may not be shared outside the company without a signed non-disclosure agreement in place. The legal team maintains the register of executed agreements.
+
+Classification labelling is mandatory on all documents, datasets and system records. Unlabelled assets discovered during audit are escalated to the asset owner for immediate remediation.
+
+Where no classification has been assigned, data defaults to Internal and must be handled accordingly. The default does not relieve the asset owner of the obligation to classify explicitly.
+
+Classifications are reviewed annually by the asset owner, or sooner where the sensitivity of the data changes. The review date is recorded against the asset in the data catalogue.
