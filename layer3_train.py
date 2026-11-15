@@ -41,8 +41,6 @@ LEARNING_RATE = 3e-5
 MAX_LENGTH = 128     # tokens; every passage in the data is shorter than this
 THRESHOLD = 0.5      # probability above which a passage is flagged
 
-LEGITIMATE_KINDS = ("clean", "benign_notice")
-POISON_KINDS = ("content_injection", "embedding_manipulation", "retrieval_hijacking")
 
 
 def set_seed(seed):
@@ -115,22 +113,24 @@ def evaluate(model, tokenizer, examples):
         total[kind] = total.get(kind, 0) + 1
         flagged[kind] = flagged.get(kind, 0) + (1 if p > THRESHOLD else 0)
 
+    # Work out which kinds are legitimate and which are poisoned from the labels.
+    legitimate_kinds = sorted({e["kind"] for e in examples if e["label"] == 0})
+    poison_kinds = sorted({e["kind"] for e in examples if e["label"] == 1})
+
     print("\nLegitimate passages (should NOT be flagged)")
-    for kind in LEGITIMATE_KINDS:
-        if kind in total:
-            print(f"  {kind:<24} flagged {flagged[kind]:>3}/{total[kind]:<3} "
-                  f"false alarm rate {flagged[kind] / total[kind]:.1%}")
+    for kind in legitimate_kinds:
+        print(f"  {kind:<30} flagged {flagged[kind]:>3}/{total[kind]:<3} "
+              f"false alarm rate {flagged[kind] / total[kind]:.1%}")
 
     print("\nPoisoned passages (should be flagged)")
-    for kind in POISON_KINDS:
-        if kind in total:
-            print(f"  {kind:<24} caught  {flagged[kind]:>3}/{total[kind]:<3} "
-                  f"detection rate  {flagged[kind] / total[kind]:.1%}")
+    for kind in poison_kinds:
+        print(f"  {kind:<30} caught  {flagged[kind]:>3}/{total[kind]:<3} "
+              f"detection rate  {flagged[kind] / total[kind]:.1%}")
 
-    legit_total = sum(total.get(k, 0) for k in LEGITIMATE_KINDS)
-    legit_flagged = sum(flagged.get(k, 0) for k in LEGITIMATE_KINDS)
-    poison_total = sum(total.get(k, 0) for k in POISON_KINDS)
-    poison_flagged = sum(flagged.get(k, 0) for k in POISON_KINDS)
+    legit_total = sum(total[k] for k in legitimate_kinds)
+    legit_flagged = sum(flagged[k] for k in legitimate_kinds)
+    poison_total = sum(total[k] for k in poison_kinds)
+    poison_flagged = sum(flagged[k] for k in poison_kinds)
 
     detection_rate = poison_flagged / poison_total if poison_total else 0.0
     false_alarm_rate = legit_flagged / legit_total if legit_total else 0.0

@@ -1,3 +1,19 @@
+"""
+RAG-Shield pipeline: retrieve -> check -> answer.
+
+For every question the system:
+  1. retrieves the top passages from the vector store
+  2. runs every check on those passages
+       Layer 1    contradiction between passages        (defense.py)
+       Layer 2    corpus distance and question echo     (defense2b.py)
+       Layer 3    classifier: written like a poison?    (defense3.py)
+       Integrity  passage is in the approved baseline   (integrity.py)
+  3. generates an answer ONLY if every check passes
+
+If any check raises an alert, no answer is generated, so poisoned content
+never reaches the language model that writes the answer.
+"""
+
 import logging
 import os
 import time
@@ -15,6 +31,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from defense import check_consistency
 from defense2b import load_model as load_layer2, check_anomaly, get_embeddings
+from defense3 import load_classifier, check_poison_style
 from integrity import save_baseline, load_baseline, check_integrity
 
 load_dotenv()
@@ -45,6 +62,9 @@ auditor_llm = ChatGoogleGenerativeAI(
 layer2_stats = load_layer2()
 layer2_embedder = get_embeddings()
 
+# Layer 3: the fine-tuned DistilBERT classifier, loaded once.
+layer3_classifier = load_classifier()
+
 ANSWER_PROMPT = (
     "Answer the question using only the context below. If the context does "
     "not contain the answer, say that you don't know.\n\n"
@@ -58,14 +78,23 @@ def build_rag_system():
     # The same embedding model is used for the store and for Layer 2.
     embeddings = layer2_embedder
 
+    vectorstore = None
     if os.path.exists(CHROMA_PATH):
-        logger.info("Existing vector store found, loading it.")
         vectorstore = Chroma(
             persist_directory=CHROMA_PATH,
             embedding_function=embeddings,
         )
-    else:
-        logger.info("No vector store found, building from %s/", DOCS_DIR)
+        stored = vectorstore._collection.count()
+        if stored == 0:
+            # Any script that opens the store creates an empty folder. An
+            # empty folder is not a built corpus, so build it now.
+            logger.info("Vector store folder exists but holds 0 passages, rebuilding.")
+            vectorstore = None
+        else:
+            logger.info("Existing vector store found with %d passages, loading it.", stored)
+
+    if vectorstore is None:
+        logger.info("Building the vector store from %s/", DOCS_DIR)
         loader = DirectoryLoader(
             DOCS_DIR,
             glob="*.txt",
@@ -139,11 +168,13 @@ def ask_question(system, question, verbose=True):
         chunk_texts, layer2_stats, embedder=layer2_embedder, question=question
     )
     t2 = time.perf_counter()
-    integrity_ok, unapproved = check_integrity(chunk_texts, system["approved"])
+    layer3_ok, layer3_report = check_poison_style(chunk_texts, layer3_classifier)
     t3 = time.perf_counter()
+    integrity_ok, unapproved = check_integrity(chunk_texts, system["approved"])
+    t4 = time.perf_counter()
 
     # 3. Answer only if nothing was flagged
-    blocked = not (layer1_ok and layer2_ok and integrity_ok)
+    blocked = not (layer1_ok and layer2_ok and layer3_ok and integrity_ok)
     answer = None if blocked else generate_answer(system["llm"], question, chunk_texts)
 
     result = {
@@ -153,6 +184,8 @@ def ask_question(system, question, verbose=True):
         "layer1_reason": layer1_reason,
         "layer2_ok": layer2_ok,
         "layer2_report": layer2_report,
+        "layer3_ok": layer3_ok,
+        "layer3_report": layer3_report,
         "integrity_ok": integrity_ok,
         "unapproved_chunks": unapproved,
         "blocked": blocked,
@@ -160,7 +193,8 @@ def ask_question(system, question, verbose=True):
         "seconds": {
             "layer1": t1 - t0,
             "layer2": t2 - t1,
-            "integrity": t3 - t2,
+            "layer3": t3 - t2,
+            "integrity": t4 - t3,
         },
     }
 
@@ -177,6 +211,7 @@ def print_result(r):
     print("\nChecks:")
     print(f"  Layer 1 (contradiction)    {status(r['layer1_ok'])}")
     print(f"  Layer 2 (distance, echo)   {status(r['layer2_ok'])}")
+    print(f"  Layer 3 (classifier)       {status(r['layer3_ok'])}")
     print(f"  Integrity (approved list)  {status(r['integrity_ok'])}")
 
     if not r["layer1_ok"]:
@@ -186,6 +221,10 @@ def print_result(r):
     if not r["layer2_ok"]:
         print("\n[!] Layer 2: a retrieved passage is statistically unusual.")
         print("\n".join(r["layer2_report"]))
+
+    if not r["layer3_ok"]:
+        print("\n[!] Layer 3: a retrieved passage is written like a poisoned one.")
+        print("\n".join(r["layer3_report"]))
 
     if not r["integrity_ok"]:
         positions = ", ".join(str(i) for i in r["unapproved_chunks"])
