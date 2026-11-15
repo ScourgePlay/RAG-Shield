@@ -4,3 +4,6 @@ __pycache__/
 chroma_db/
 rag_system.log
 dataset.py
+layer3_model/
+*.joblib
+approved_chunks.json

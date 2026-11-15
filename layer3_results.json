@@ -1,0 +1,36 @@
+{
+  "per_kind": {
+    "clean": {
+      "flagged": 0,
+      "total": 36
+    },
+    "benign_notice": {
+      "flagged": 0,
+      "total": 36
+    },
+    "content_injection": {
+      "flagged": 36,
+      "total": 36
+    },
+    "embedding_manipulation": {
+      "flagged": 36,
+      "total": 36
+    },
+    "retrieval_hijacking": {
+      "flagged": 36,
+      "total": 36
+    }
+  },
+  "detection_rate": 1.0,
+  "false_alarm_rate": 0.0,
+  "settings": {
+    "base_model": "distilbert-base-uncased",
+    "seed": 42,
+    "epochs": 4,
+    "batch_size": 16,
+    "learning_rate": 3e-05,
+    "threshold": 0.5,
+    "train_examples": 359,
+    "test_examples": 180
+  }
+}
