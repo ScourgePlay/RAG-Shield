@@ -8,6 +8,7 @@ from langchain_chroma import Chroma
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain_classic.chains import RetrievalQA
 from langchain_huggingface import HuggingFaceEmbeddings
+from defense2b import load_model as load_layer2, check_anomaly, get_embeddings
 
 
 load_dotenv()
@@ -23,10 +24,13 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 # This Is the LLM used for consistency checking (Auditor), separate from the main RAG system LLM 
 auditor_llm = ChatGoogleGenerativeAI(
-    model="gemini-flash-latest",
+    model="gemini-flash-lite-latest",
     google_api_key=os.getenv("GOOGLE_API_KEY"),
     temperature=0,
+    
 )
+layer2_stats = load_layer2()
+layer2_embedder = get_embeddings()
 
 
 def build_rag_system():
@@ -71,9 +75,9 @@ def build_rag_system():
         documents = loader.load()
         splitter = RecursiveCharacterTextSplitter(chunk_size=300, chunk_overlap=50)
         chunks = splitter.split_documents(documents)
-        for i, c in enumerate(chunks, 1):
-            print(f"\n--- Chunk {i} ({len(c.page_content)} chars) ---")
-            print(c.page_content)
+        # for i, c in enumerate(chunks, 1):
+        #     print(f"\n--- Chunk {i} ({len(c.page_content)} chars) ---")
+        #     print(c.page_content)
         logger.info("Created %d chunks", len(chunks))
         vectorstore = Chroma.from_documents(
             documents=chunks,
@@ -85,7 +89,7 @@ def build_rag_system():
     # Step 4: Build QA chain
     logger.info("[4/4] Connecting LLM...")
     llm = ChatGoogleGenerativeAI(
-        model="gemini-flash-latest",
+        model="gemini-flash-lite-latest",
         google_api_key=os.getenv("GOOGLE_API_KEY"),
         temperature=0
     )
@@ -102,15 +106,30 @@ def ask_question(qa_chain, question):
     """Send a question to the RAG system and print the answer + sources."""
     result = qa_chain.invoke({"query": question})
     chunks_texts = [doc.page_content for doc in result["source_documents"]]
+
+    # Layer 1: do the retrieved chunks contradict each other?
     is_consistent, explanation = check_consistency(chunks_texts, auditor_llm)
     if not is_consistent:
         print("\n[!] POISONING ALERT — retrieved documents contradict each other.")
         print(explanation)
+
+    # Layer 2: does any retrieved chunk fail to resemble the corpus?
+    layer2_clean, layer2_report = check_anomaly(
+        chunks_texts, layer2_stats, embedder=layer2_embedder
+    )
+    print("\nLayer 2 distances (threshold %.4f):" % layer2_stats["clean_max"])
+    print("\n".join(layer2_report))
+
+    if not layer2_clean:
+        print("\n[!] LAYER 2 ALERT: a retrieved chunk does not resemble the corpus.")
+        # print("\n".join(layer2_report))
+
     print("\nAnswer:", result["result"])
     print("\nSources used:")
     for i, doc in enumerate(result["source_documents"], 1):
         print(f"  [{i}] {doc.page_content[:80].strip()}...")
     return result
+    
 
 
 if __name__ == "__main__":

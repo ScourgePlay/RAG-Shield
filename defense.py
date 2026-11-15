@@ -34,7 +34,7 @@ def check_consistency(chunks, llm):
 if __name__ == "__main__":
     # Quick standalone test with a known contradiction
     llm = ChatGoogleGenerativeAI(
-        model="gemini-flash-latest",
+        model="gemini-flash-lite-latest",
         google_api_key=os.getenv("GOOGLE_API_KEY"),
         temperature=0,
     )

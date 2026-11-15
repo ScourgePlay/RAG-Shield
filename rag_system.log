@@ -799,3 +799,260 @@ ImportError: Could not import sentence_transformers python package. Please insta
 2026-10-25 15:13:59,305 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 200 OK"
 2026-10-25 15:13:59,315 [INFO] AFC is enabled with max remote calls: 10.
 2026-10-25 15:15:59,388 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 200 OK"
+2026-10-28 06:14:21,151 [INFO] ==================================================
+2026-10-28 06:14:21,153 [INFO] Building RAG System...
+2026-10-28 06:14:21,153 [INFO] ==================================================
+2026-10-28 06:14:21,153 [INFO] [3/4] Building vector database...
+2026-10-28 06:14:21,155 [INFO] No device provided, using cpu
+2026-10-28 06:14:21,692 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-10-28 06:14:21,695 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-10-28 06:14:22,251 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-10-28 06:14:22,570 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-28 06:14:23,218 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-10-28 06:14:23,221 [INFO] No vector store found — building from source documents.
+2026-10-28 06:14:23,237 [INFO] Created 107 chunks
+2026-10-28 06:14:24,456 [INFO] Vector database created successfully
+2026-10-28 06:14:24,456 [INFO] [4/4] Connecting LLM...
+2026-10-28 06:14:24,512 [INFO] LLM connected successfully
+2026-11-14 11:08:01,447 [INFO] ==================================================
+2026-11-14 11:08:01,450 [INFO] Building RAG System...
+2026-11-14 11:08:01,450 [INFO] ==================================================
+2026-11-14 11:08:01,450 [INFO] [3/4] Building vector database...
+2026-11-14 11:08:01,451 [INFO] No device provided, using cpu
+2026-11-14 11:08:01,938 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 11:08:01,950 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 11:08:02,371 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 11:08:02,667 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 11:08:03,034 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 11:08:03,035 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-11-14 11:08:03,038 [INFO] Existing vector store found — loading (no re-ingest).
+2026-11-14 11:08:03,110 [INFO] Vector database created successfully
+2026-11-14 11:08:03,110 [INFO] [4/4] Connecting LLM...
+2026-11-14 11:08:03,150 [INFO] LLM connected successfully
+2026-11-14 11:08:22,673 [INFO] AFC is enabled with max remote calls: 10.
+2026-11-14 11:08:46,394 [INFO] No device provided, using cpu
+2026-11-14 11:08:46,890 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 11:08:46,911 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 11:08:47,391 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 11:08:47,696 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 11:08:48,082 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 11:08:48,083 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-11-14 11:08:48,088 [INFO] ==================================================
+2026-11-14 11:08:48,088 [INFO] Building RAG System...
+2026-11-14 11:08:48,088 [INFO] ==================================================
+2026-11-14 11:08:48,088 [INFO] [3/4] Building vector database...
+2026-11-14 11:08:48,090 [INFO] No device provided, using cpu
+2026-11-14 11:08:48,382 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 11:08:48,389 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 11:08:48,732 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 11:08:49,035 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 11:08:49,361 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 11:08:49,365 [INFO] Existing vector store found — loading (no re-ingest).
+2026-11-14 11:08:49,497 [INFO] Vector database created successfully
+2026-11-14 11:08:49,497 [INFO] [4/4] Connecting LLM...
+2026-11-14 11:08:49,573 [INFO] LLM connected successfully
+2026-11-14 11:08:53,959 [INFO] AFC is enabled with max remote calls: 10.
+2026-11-14 11:09:55,327 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 200 OK"
+2026-11-14 11:09:55,331 [INFO] AFC is enabled with max remote calls: 10.
+2026-11-14 11:10:00,664 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-11-14 11:10:00,666 [INFO] Retrying google.genai._api_client.BaseApiClient._request_once in 1.91 seconds as it raised ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}.
+2026-11-14 11:10:06,139 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-11-14 11:10:06,141 [INFO] Retrying google.genai._api_client.BaseApiClient._request_once in 2.42 seconds as it raised ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}.
+2026-11-14 11:11:41,722 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 200 OK"
+2026-11-14 11:14:57,113 [INFO] AFC is enabled with max remote calls: 10.
+2026-11-14 11:17:38,075 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 200 OK"
+2026-11-14 11:17:38,086 [INFO] AFC is enabled with max remote calls: 10.
+2026-11-14 11:25:45,836 [INFO] No device provided, using cpu
+2026-11-14 11:25:46,330 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 11:25:46,338 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 11:25:46,774 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 11:25:47,073 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 11:25:47,419 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 11:25:47,420 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-11-14 11:25:47,423 [INFO] ==================================================
+2026-11-14 11:25:47,423 [INFO] Building RAG System...
+2026-11-14 11:25:47,424 [INFO] ==================================================
+2026-11-14 11:25:47,424 [INFO] [3/4] Building vector database...
+2026-11-14 11:25:47,424 [INFO] No device provided, using cpu
+2026-11-14 11:25:47,713 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 11:25:47,721 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 11:25:48,066 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 11:25:48,378 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 11:25:48,690 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 11:25:48,694 [INFO] Existing vector store found — loading (no re-ingest).
+2026-11-14 11:25:48,767 [INFO] Vector database created successfully
+2026-11-14 11:25:48,767 [INFO] [4/4] Connecting LLM...
+2026-11-14 11:25:48,804 [INFO] LLM connected successfully
+2026-11-14 11:26:10,553 [INFO] AFC is enabled with max remote calls: 10.
+2026-11-14 11:29:56,513 [INFO] No device provided, using cpu
+2026-11-14 11:29:57,028 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 11:29:57,043 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 11:29:57,500 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 11:29:57,809 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 11:29:58,168 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 11:29:58,172 [INFO] ==================================================
+2026-11-14 11:29:58,172 [INFO] Building RAG System...
+2026-11-14 11:29:58,172 [INFO] ==================================================
+2026-11-14 11:29:58,172 [INFO] [3/4] Building vector database...
+2026-11-14 11:29:58,173 [INFO] No device provided, using cpu
+2026-11-14 11:29:58,474 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 11:29:58,482 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 11:29:58,835 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 11:29:59,141 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 11:29:59,457 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 11:29:59,457 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-11-14 11:29:59,460 [INFO] Existing vector store found — loading (no re-ingest).
+2026-11-14 11:29:59,537 [INFO] Vector database created successfully
+2026-11-14 11:29:59,537 [INFO] [4/4] Connecting LLM...
+2026-11-14 11:29:59,573 [INFO] LLM connected successfully
+2026-11-14 11:30:33,307 [INFO] AFC is enabled with max remote calls: 10.
+2026-11-14 11:30:36,800 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-11-14 11:30:36,802 [INFO] Retrying google.genai._api_client.BaseApiClient._request_once in 1.14 seconds as it raised ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}.
+2026-11-14 11:39:54,576 [INFO] No device provided, using cpu
+2026-11-14 11:39:55,080 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 11:39:55,087 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 11:39:55,506 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 11:39:55,804 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 11:39:56,147 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 11:39:56,148 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-11-14 11:39:56,153 [INFO] ==================================================
+2026-11-14 11:39:56,153 [INFO] Building RAG System...
+2026-11-14 11:39:56,153 [INFO] ==================================================
+2026-11-14 11:39:56,153 [INFO] [3/4] Building vector database...
+2026-11-14 11:39:56,154 [INFO] No device provided, using cpu
+2026-11-14 11:39:56,440 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 11:39:56,456 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 11:39:56,784 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 11:39:57,093 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 11:39:57,419 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 11:39:57,423 [INFO] Existing vector store found — loading (no re-ingest).
+2026-11-14 11:39:57,499 [INFO] Vector database created successfully
+2026-11-14 11:39:57,499 [INFO] [4/4] Connecting LLM...
+2026-11-14 11:39:57,537 [INFO] LLM connected successfully
+2026-11-14 11:40:26,145 [INFO] AFC is enabled with max remote calls: 10.
+2026-11-14 11:40:27,745 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent "HTTP/1.1 200 OK"
+2026-11-14 11:40:27,750 [INFO] AFC is enabled with max remote calls: 10.
+2026-11-14 11:40:29,257 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent "HTTP/1.1 200 OK"
+2026-11-14 11:41:04,094 [INFO] AFC is enabled with max remote calls: 10.
+2026-11-14 11:41:05,342 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent "HTTP/1.1 200 OK"
+2026-11-14 11:41:05,345 [INFO] AFC is enabled with max remote calls: 10.
+2026-11-14 11:41:06,350 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent "HTTP/1.1 200 OK"
+2026-11-14 11:44:26,077 [INFO] No device provided, using cpu
+2026-11-14 11:44:26,536 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 11:44:26,540 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 11:44:27,213 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 11:44:27,514 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 11:44:27,855 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 11:44:27,856 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-11-14 11:44:27,859 [INFO] ==================================================
+2026-11-14 11:44:27,859 [INFO] Building RAG System...
+2026-11-14 11:44:27,859 [INFO] ==================================================
+2026-11-14 11:44:27,859 [INFO] [3/4] Building vector database...
+2026-11-14 11:44:27,860 [INFO] No device provided, using cpu
+2026-11-14 11:44:28,155 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 11:44:28,166 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 11:44:28,490 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 11:44:28,786 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 11:44:29,095 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 11:44:29,098 [INFO] Existing vector store found — loading (no re-ingest).
+2026-11-14 11:44:29,173 [INFO] Vector database created successfully
+2026-11-14 11:44:29,174 [INFO] [4/4] Connecting LLM...
+2026-11-14 11:44:29,212 [INFO] LLM connected successfully
+2026-11-14 11:44:32,769 [INFO] AFC is enabled with max remote calls: 10.
+2026-11-14 11:44:38,986 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent "HTTP/1.1 200 OK"
+2026-11-14 11:44:38,990 [INFO] AFC is enabled with max remote calls: 10.
+2026-11-14 11:44:45,826 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent "HTTP/1.1 200 OK"
+2026-11-14 11:46:44,383 [INFO] No device provided, using cpu
+2026-11-14 11:46:44,938 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 11:46:44,950 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 11:46:45,438 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 11:46:45,742 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 11:46:46,066 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 11:46:46,067 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-11-14 11:46:46,070 [INFO] ==================================================
+2026-11-14 11:46:46,070 [INFO] Building RAG System...
+2026-11-14 11:46:46,070 [INFO] ==================================================
+2026-11-14 11:46:46,070 [INFO] [3/4] Building vector database...
+2026-11-14 11:46:46,071 [INFO] No device provided, using cpu
+2026-11-14 11:46:46,358 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 11:46:46,367 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 11:46:46,698 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 11:46:46,995 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 11:46:47,323 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 11:46:47,328 [INFO] No vector store found — building from source documents.
+2026-11-14 11:46:47,344 [INFO] Created 107 chunks
+2026-11-14 11:46:48,255 [INFO] Vector database created successfully
+2026-11-14 11:46:48,255 [INFO] [4/4] Connecting LLM...
+2026-11-14 11:46:48,298 [INFO] LLM connected successfully
+2026-11-14 11:56:05,625 [INFO] No device provided, using cpu
+2026-11-14 11:56:06,054 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 11:56:06,058 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 11:56:06,473 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 11:56:06,759 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 11:56:07,093 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 11:56:07,097 [INFO] ==================================================
+2026-11-14 11:56:07,097 [INFO] Building RAG System...
+2026-11-14 11:56:07,097 [INFO] ==================================================
+2026-11-14 11:56:07,097 [INFO] [3/4] Building vector database...
+2026-11-14 11:56:07,099 [INFO] No device provided, using cpu
+2026-11-14 11:56:07,389 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 11:56:07,397 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 11:56:07,707 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 11:56:07,987 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 11:56:08,310 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 11:56:08,310 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-11-14 11:56:08,313 [INFO] Existing vector store found — loading (no re-ingest).
+2026-11-14 11:56:08,400 [INFO] Vector database created successfully
+2026-11-14 11:56:08,400 [INFO] [4/4] Connecting LLM...
+2026-11-14 11:56:08,438 [INFO] LLM connected successfully
+2026-11-14 11:56:14,648 [INFO] AFC is enabled with max remote calls: 10.
+2026-11-14 11:56:16,329 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent "HTTP/1.1 200 OK"
+2026-11-14 11:56:16,334 [INFO] AFC is enabled with max remote calls: 10.
+2026-11-14 11:56:17,885 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent "HTTP/1.1 200 OK"
+2026-11-14 13:04:57,840 [INFO] No device provided, using cpu
+2026-11-14 13:04:58,344 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 13:04:58,354 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 13:04:58,748 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 13:04:59,065 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 13:04:59,429 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 13:04:59,430 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-11-14 13:04:59,434 [INFO] ==================================================
+2026-11-14 13:04:59,434 [INFO] Building RAG System...
+2026-11-14 13:04:59,434 [INFO] ==================================================
+2026-11-14 13:04:59,434 [INFO] [3/4] Building vector database...
+2026-11-14 13:04:59,436 [INFO] No device provided, using cpu
+2026-11-14 13:04:59,739 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 13:04:59,746 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 13:05:00,116 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 13:05:00,419 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 13:05:00,748 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 13:05:00,753 [INFO] No vector store found — building from source documents.
+2026-11-14 13:05:00,764 [INFO] Created 107 chunks
+2026-11-14 13:05:01,783 [INFO] Vector database created successfully
+2026-11-14 13:05:01,784 [INFO] [4/4] Connecting LLM...
+2026-11-14 13:05:01,830 [INFO] LLM connected successfully
+2026-11-14 13:10:45,523 [INFO] No device provided, using cpu
+2026-11-14 13:10:46,113 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 13:10:46,121 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 13:10:46,526 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 13:10:46,859 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 13:10:47,210 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 13:10:47,210 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-11-14 13:10:47,214 [INFO] ==================================================
+2026-11-14 13:10:47,214 [INFO] Building RAG System...
+2026-11-14 13:10:47,214 [INFO] ==================================================
+2026-11-14 13:10:47,215 [INFO] [3/4] Building vector database...
+2026-11-14 13:10:47,217 [INFO] No device provided, using cpu
+2026-11-14 13:10:47,762 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-11-14 13:10:47,773 [INFO] Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+2026-11-14 13:10:48,093 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-11-14 13:10:48,714 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-11-14 13:10:49,061 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+2026-11-14 13:10:49,065 [INFO] Existing vector store found — loading (no re-ingest).
+2026-11-14 13:10:49,136 [INFO] Vector database created successfully
+2026-11-14 13:10:49,136 [INFO] [4/4] Connecting LLM...
+2026-11-14 13:10:49,175 [INFO] LLM connected successfully
+2026-11-14 13:10:56,537 [INFO] AFC is enabled with max remote calls: 10.
+2026-11-14 13:10:57,979 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent "HTTP/1.1 200 OK"
+2026-11-14 13:10:57,983 [INFO] AFC is enabled with max remote calls: 10.
+2026-11-14 13:10:59,039 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent "HTTP/1.1 200 OK"
