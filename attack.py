@@ -91,6 +91,6 @@ def inject_hijack():
 
 if __name__ == "__main__":
     # inject_poison()
-    # inject_embedding_manipulation()
+    inject_embedding_manipulation()
     # inject_gap_poison()
-    inject_hijack()
+    # inject_hijack()

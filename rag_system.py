@@ -1,17 +1,28 @@
-from dotenv import load_dotenv
-from defense import check_consistency
 import logging
 import os
-from langchain_community.document_loaders import DirectoryLoader, TextLoader
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_chroma import Chroma
-from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
-from langchain_classic.chains import RetrievalQA
-from langchain_huggingface import HuggingFaceEmbeddings
-from defense2b import load_model as load_layer2, check_anomaly, get_embeddings
+import time
 
+try:
+    import readline  # noqa: F401  (makes arrow keys and backspace work at the prompt)
+except ImportError:
+    pass
+
+from dotenv import load_dotenv
+from langchain_chroma import Chroma
+from langchain_community.document_loaders import DirectoryLoader, TextLoader
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+from defense import check_consistency
+from defense2b import load_model as load_layer2, check_anomaly, get_embeddings
+from integrity import save_baseline, load_baseline, check_integrity
 
 load_dotenv()
+
+CHROMA_PATH = "./chroma_db"
+DOCS_DIR = "documents"
+LLM_MODEL = "gemini-flash-lite-latest"
+TOP_K = 3
 
 logging.basicConfig(
     level=logging.INFO,
@@ -22,124 +33,182 @@ logging.basicConfig(
     ],
 )
 logger = logging.getLogger(__name__)
-# This Is the LLM used for consistency checking (Auditor), separate from the main RAG system LLM 
+
+# Layer 1 auditor: a separate LLM instance from the one that writes answers.
 auditor_llm = ChatGoogleGenerativeAI(
-    model="gemini-flash-lite-latest",
+    model=LLM_MODEL,
     google_api_key=os.getenv("GOOGLE_API_KEY"),
     temperature=0,
-    
 )
+
+# Layer 2: nearest-neighbour baseline and the embedding model, loaded once.
 layer2_stats = load_layer2()
 layer2_embedder = get_embeddings()
 
+ANSWER_PROMPT = (
+    "Answer the question using only the context below. If the context does "
+    "not contain the answer, say that you don't know.\n\n"
+    "Context:\n{context}\n\n"
+    "Question: {question}"
+)
+
 
 def build_rag_system():
-    logger.info("=" * 50)
-    logger.info("Building RAG System...")
-    logger.info("=" * 50)
+    """Load the vector store (or build it once) and return what a question needs."""
+    # The same embedding model is used for the store and for Layer 2.
+    embeddings = layer2_embedder
 
-    # Step 1: Load document
-    # logger.info("[1/4] Loading document...")
-    # loader = TextLoader("documents/company_policy.txt")
-    # documents = loader.load()
-    # logger.info("Loaded %d document(s)", len(documents))
-
-    # # Step 2: Split into chunks
-    # logger.info("[2/4] Splitting into chunks...")
-    # splitter = RecursiveCharacterTextSplitter(
-    #     chunk_size=200,
-    #     chunk_overlap=50
-    # )
-    # chunks = splitter.split_documents(documents)
-    # logger.info("Created %d chunks", len(chunks))
-
-    # Step 3: Store in vector database
-    logger.info("[3/4] Building vector database...")
-    embeddings = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
-    )
-
-    if os.path.exists("./chroma_db"):
-        logger.info("Existing vector store found — loading (no re-ingest).")
+    if os.path.exists(CHROMA_PATH):
+        logger.info("Existing vector store found, loading it.")
         vectorstore = Chroma(
-            persist_directory="./chroma_db",
+            persist_directory=CHROMA_PATH,
             embedding_function=embeddings,
         )
     else:
-        logger.info("No vector store found — building from source documents.")
+        logger.info("No vector store found, building from %s/", DOCS_DIR)
         loader = DirectoryLoader(
-            "documents",
+            DOCS_DIR,
             glob="*.txt",
             loader_cls=TextLoader,
+            loader_kwargs={"encoding": "utf-8"},
         )
         documents = loader.load()
         splitter = RecursiveCharacterTextSplitter(chunk_size=300, chunk_overlap=50)
         chunks = splitter.split_documents(documents)
-        # for i, c in enumerate(chunks, 1):
-        #     print(f"\n--- Chunk {i} ({len(c.page_content)} chars) ---")
-        #     print(c.page_content)
-        logger.info("Created %d chunks", len(chunks))
         vectorstore = Chroma.from_documents(
             documents=chunks,
             embedding=embeddings,
-            persist_directory="./chroma_db",
+            persist_directory=CHROMA_PATH,
         )
-    logger.info("Vector database created successfully")
+        # Everything in the store right now came from the source documents,
+        # so this is the moment to record the approved baseline.
+        saved = save_baseline([c.page_content for c in chunks])
+        logger.info(
+            "Built store with %d chunks; %d fingerprints saved as the approved baseline.",
+            len(chunks), saved,
+        )
 
-    # Step 4: Build QA chain
-    logger.info("[4/4] Connecting LLM...")
     llm = ChatGoogleGenerativeAI(
-        model="gemini-flash-lite-latest",
+        model=LLM_MODEL,
         google_api_key=os.getenv("GOOGLE_API_KEY"),
-        temperature=0
+        temperature=0,
     )
-    qa_chain = RetrievalQA.from_chain_type(
-        llm=llm,
-        retriever=vectorstore.as_retriever(search_kwargs={"k": 3}),
-        return_source_documents=True
+
+    return {
+        "retriever": vectorstore.as_retriever(search_kwargs={"k": TOP_K}),
+        "llm": llm,
+        "approved": load_baseline(),
+    }
+
+
+def _response_text(response):
+    """Return the text of an LLM response whether it arrives as a string or as parts."""
+    content = response.content
+    if isinstance(content, str):
+        return content.strip()
+    parts = []
+    for part in content:
+        parts.append(part.get("text", "") if isinstance(part, dict) else str(part))
+    return "".join(parts).strip()
+
+
+def generate_answer(llm, question, chunk_texts):
+    """Ask the LLM to answer from the retrieved passages only."""
+    prompt = ANSWER_PROMPT.format(
+        context="\n\n".join(chunk_texts),
+        question=question,
     )
-    logger.info("LLM connected successfully")
+    return _response_text(llm.invoke(prompt))
 
-    return qa_chain
 
-def ask_question(qa_chain, question):
-    """Send a question to the RAG system and print the answer + sources."""
-    result = qa_chain.invoke({"query": question})
-    chunks_texts = [doc.page_content for doc in result["source_documents"]]
+def ask_question(system, question, verbose=True):
+    """Retrieve, run every check, and answer only if all checks pass.
 
-    # Layer 1: do the retrieved chunks contradict each other?
-    is_consistent, explanation = check_consistency(chunks_texts, auditor_llm)
-    if not is_consistent:
-        print("\n[!] POISONING ALERT — retrieved documents contradict each other.")
-        print(explanation)
+    Returns a dictionary of results so the benchmark and the web app can use
+    the same function as the interactive prompt.
+    """
+    # 1. Retrieve
+    docs = system["retriever"].invoke(question)
+    chunk_texts = [d.page_content for d in docs]
 
-    # Layer 2: does any retrieved chunk fail to resemble the corpus?
-    layer2_clean, layer2_report = check_anomaly(
-        chunks_texts, layer2_stats, embedder=layer2_embedder
+    # 2. Check (each check is timed so the benchmark can report latency)
+    t0 = time.perf_counter()
+    layer1_ok, layer1_reason = check_consistency(chunk_texts, auditor_llm)
+    t1 = time.perf_counter()
+    layer2_ok, layer2_report = check_anomaly(
+        chunk_texts, layer2_stats, embedder=layer2_embedder, question=question
     )
-    print("\nLayer 2 distances (threshold %.4f):" % layer2_stats["clean_max"])
-    print("\n".join(layer2_report))
+    t2 = time.perf_counter()
+    integrity_ok, unapproved = check_integrity(chunk_texts, system["approved"])
+    t3 = time.perf_counter()
 
-    if not layer2_clean:
-        print("\n[!] LAYER 2 ALERT: a retrieved chunk does not resemble the corpus.")
-        # print("\n".join(layer2_report))
+    # 3. Answer only if nothing was flagged
+    blocked = not (layer1_ok and layer2_ok and integrity_ok)
+    answer = None if blocked else generate_answer(system["llm"], question, chunk_texts)
 
-    print("\nAnswer:", result["result"])
-    print("\nSources used:")
-    for i, doc in enumerate(result["source_documents"], 1):
-        print(f"  [{i}] {doc.page_content[:80].strip()}...")
+    result = {
+        "question": question,
+        "chunks": chunk_texts,
+        "layer1_ok": layer1_ok,
+        "layer1_reason": layer1_reason,
+        "layer2_ok": layer2_ok,
+        "layer2_report": layer2_report,
+        "integrity_ok": integrity_ok,
+        "unapproved_chunks": unapproved,
+        "blocked": blocked,
+        "answer": answer,
+        "seconds": {
+            "layer1": t1 - t0,
+            "layer2": t2 - t1,
+            "integrity": t3 - t2,
+        },
+    }
+
+    if verbose:
+        print_result(result)
     return result
-    
+
+
+def print_result(r):
+    """Show one result at the interactive prompt."""
+    def status(ok):
+        return "pass" if ok else "ALERT"
+
+    print("\nChecks:")
+    print(f"  Layer 1 (contradiction)    {status(r['layer1_ok'])}")
+    print(f"  Layer 2 (distance, echo)   {status(r['layer2_ok'])}")
+    print(f"  Integrity (approved list)  {status(r['integrity_ok'])}")
+
+    if not r["layer1_ok"]:
+        print("\n[!] Layer 1: retrieved passages contradict each other.")
+        print(r["layer1_reason"])
+
+    if not r["layer2_ok"]:
+        print("\n[!] Layer 2: a retrieved passage is statistically unusual.")
+        print("\n".join(r["layer2_report"]))
+
+    if not r["integrity_ok"]:
+        positions = ", ".join(str(i) for i in r["unapproved_chunks"])
+        print(f"\n[!] Integrity: passage(s) not in the approved corpus: {positions}")
+
+    if r["blocked"]:
+        print("\nAnswer withheld: at least one check raised an alert.")
+    else:
+        print("\nAnswer:", r["answer"])
+
+    print("\nPassages retrieved:")
+    for i, text in enumerate(r["chunks"], 1):
+        print(f"  [{i}] {text[:80].strip()}...")
 
 
 if __name__ == "__main__":
     try:
-        qa_chain = build_rag_system()
+        system = build_rag_system()
     except Exception:
         logger.exception("RAG system build failed")
         raise
 
-    print("\n--- RAG System Ready. Type a question, or 'quit' to exit. ---")
+    print("\n--- RAG-Shield ready. Type a question, or 'quit' to exit. ---")
     while True:
         question = input("\nYour question: ").strip()
         if question.lower() in ("quit", "exit", "q"):
@@ -147,4 +216,7 @@ if __name__ == "__main__":
             break
         if not question:
             continue
-        ask_question(qa_chain, question)
+        try:
+            ask_question(system, question)
+        except Exception as e:
+            print(f"\nThat question failed ({type(e).__name__}). Wait a moment and ask again.")

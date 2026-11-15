@@ -28,7 +28,11 @@ def check_consistency(chunks, llm):
     response = llm.invoke(prompt)
     text = response.text.strip()
 
-    is_consistent = "CONTRADICTION" not in text.upper()
+    verdict_line = next(
+        (line for line in text.splitlines() if line.upper().startswith("VERDICT")),
+        "",
+    )
+    is_consistent = "CONTRADICTION" not in verdict_line.upper()
     return is_consistent, text
 
 if __name__ == "__main__":
