@@ -1,0 +1,125 @@
+{
+  "results_file": "benchmark_results.csv",
+  "cases": 432,
+  "false_alarms": {
+    "layer1": {
+      "alerts": 5,
+      "total": 108
+    },
+    "layer2": {
+      "alerts": 0,
+      "total": 108
+    },
+    "layer3": {
+      "alerts": 0,
+      "total": 108
+    },
+    "integrity": {
+      "alerts": 0,
+      "total": 108
+    },
+    "any": {
+      "alerts": 5,
+      "total": 108
+    }
+  },
+  "detection": {
+    "content_injection": {
+      "poisons": 108,
+      "retrieved": 107,
+      "layer1": {
+        "alerts": 105,
+        "total": 107
+      },
+      "layer2": {
+        "alerts": 0,
+        "total": 107
+      },
+      "layer3": {
+        "alerts": 107,
+        "total": 107
+      },
+      "integrity": {
+        "alerts": 107,
+        "total": 107
+      },
+      "any": {
+        "alerts": 107,
+        "total": 107
+      }
+    },
+    "embedding_manipulation": {
+      "poisons": 108,
+      "retrieved": 85,
+      "layer1": {
+        "alerts": 2,
+        "total": 85
+      },
+      "layer2": {
+        "alerts": 0,
+        "total": 85
+      },
+      "layer3": {
+        "alerts": 84,
+        "total": 85
+      },
+      "integrity": {
+        "alerts": 85,
+        "total": 85
+      },
+      "any": {
+        "alerts": 85,
+        "total": 85
+      }
+    },
+    "retrieval_hijacking": {
+      "poisons": 108,
+      "retrieved": 107,
+      "layer1": {
+        "alerts": 106,
+        "total": 107
+      },
+      "layer2": {
+        "alerts": 107,
+        "total": 107
+      },
+      "layer3": {
+        "alerts": 107,
+        "total": 107
+      },
+      "integrity": {
+        "alerts": 107,
+        "total": 107
+      },
+      "any": {
+        "alerts": 107,
+        "total": 107
+      }
+    }
+  },
+  "layer3_held_out": {
+    "clean": {
+      "alerts": 0,
+      "total": 36
+    },
+    "content_injection": {
+      "alerts": 35,
+      "total": 35
+    },
+    "embedding_manipulation": {
+      "alerts": 26,
+      "total": 27
+    },
+    "retrieval_hijacking": {
+      "alerts": 36,
+      "total": 36
+    }
+  },
+  "milliseconds_median": {
+    "layer1": 871.6,
+    "layer2": 25.8,
+    "layer3": 63.75,
+    "integrity": 0.03,
+    "answer generation": 1141.5
+  }
+}
