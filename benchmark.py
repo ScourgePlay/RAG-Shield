@@ -24,6 +24,7 @@ Usage
     python benchmark.py --no-layer1    full run without Layer 1 (no Gemini calls,
                                        saved to a separate results file)
     python benchmark.py --summary      print the result tables again
+    python benchmark.py --details      list the false alarms and missed poisons
 """
 
 import argparse
@@ -270,6 +271,15 @@ def _rate(rows, key):
     return sum(v == "1" for v in values), len(values)
 
 
+def _layers_alert(row):
+    """True if any of Layers 1-3 raised an alert (the integrity check is ignored)."""
+    return any(row[f"{c}_alert"] == "1" for c in ("layer1", "layer2", "layer3"))
+
+
+def _layers_rate(rows):
+    return sum(_layers_alert(r) for r in rows), len(rows)
+
+
 def _show(count, total, empty="no cases"):
     return f"{count:>3}/{total:<3} {count / total:6.1%}" if total else f"   {empty}"
 
@@ -291,7 +301,8 @@ def summarise(path):
         "layer2": "Layer 2  distance, echo",
         "layer3": "Layer 3  classifier",
         "integrity": "Integrity check",
-        "any": "Any check (system)",
+        "layers": "Layers 1-3 together",
+        "any": "All four checks",
     }
     keys = {c: f"{c}_alert" for c in CHECKS}
     keys["any"] = "any_alert"
@@ -304,6 +315,10 @@ def summarise(path):
     for name in CHECKS + ["any"]:
         count, total = _rate(clean, keys[name])
         empty = "not run" if name == "layer1" and clean else "no cases"
+        if name == "any":
+            lc, lt = _layers_rate(clean)
+            print(f"   {labels['layers']:<26} {_show(lc, lt)}")
+            summary["false_alarms"]["layers"] = {"alerts": lc, "total": lt}
         print(f"   {labels[name]:<26} {_show(count, total, empty)}")
         summary["false_alarms"][name] = {"alerts": count, "total": total}
 
@@ -324,6 +339,10 @@ def summarise(path):
         for name in CHECKS + ["any"]:
             count, n = _rate(reached, keys[name])
             empty = "not run" if name == "layer1" and reached else "no cases"
+            if name == "any":
+                lc, lt = _layers_rate(reached)
+                print(f"     {labels['layers']:<26} {_show(lc, lt)}")
+                summary["detection"][attack]["layers"] = {"alerts": lc, "total": lt}
             print(f"     {labels[name]:<26} {_show(count, n, empty)}")
             summary["detection"][attack][name] = {"alerts": count, "total": n}
 
@@ -357,9 +376,50 @@ def summarise(path):
         else:
             print(f"   {labels.get(name, 'Answer generation (sample)'):<26}   not measured")
 
+    def _total(row, columns):
+        return sum(float(row[c]) for c in columns if row[c] != "")
+
+    local = [_total(r, ("t_layer2", "t_layer3", "t_integrity")) for r in rows]
+    everything = [_total(r, ("t_layer1", "t_layer2", "t_layer3", "t_integrity")) for r in rows]
+    local_ms = statistics.median(local) * 1000
+    all_ms = statistics.median(everything) * 1000
+    print(f"   {'Layers 2, 3 + integrity':<26} {local_ms:9.1f} ms   (no Gemini call)")
+    print(f"   {'All four checks':<26} {all_ms:9.1f} ms")
+    summary["milliseconds_median"]["local checks"] = round(local_ms, 2)
+    summary["milliseconds_median"]["all checks"] = round(all_ms, 2)
+
     with open(SUMMARY_FILE, "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2)
     print(f"\nSummary saved to {SUMMARY_FILE}")
+
+
+def details(path):
+    """List the individual cases worth reading: false alarms and misses."""
+    rows = read_rows(path)
+    if not rows:
+        sys.exit(f"No results in {path} yet.")
+
+    names = (("L1", "layer1_alert"), ("L2", "layer2_alert"),
+             ("L3", "layer3_alert"), ("INT", "integrity_alert"))
+
+    print("\nCLEAN QUESTIONS THAT RAISED AN ALERT (false alarms)")
+    found = False
+    for r in rows:
+        if r["kind"] == "clean" and r["any_alert"] == "1":
+            found = True
+            flags = " ".join(n for n, key in names if r[key] == "1")
+            print(f"  [{flags}] {r['domain']}: {r['question']}")
+    if not found:
+        print("  none")
+
+    print("\nRETRIEVED POISONS THAT LAYERS 1-3 ALL MISSED")
+    found = False
+    for r in rows:
+        if r["kind"] != "clean" and r["poison_retrieved"] == "1" and not _layers_alert(r):
+            found = True
+            print(f"  {r['kind']}, rank {r['poison_rank']}, {r['domain']}: {r['question']}")
+    if not found:
+        print("  none")
 
 
 # ------------------------------------------------------------------ main
@@ -369,7 +429,16 @@ def main():
     parser.add_argument("--quick", action="store_true", help="small trial run")
     parser.add_argument("--no-layer1", action="store_true", help="skip Layer 1 (no Gemini calls)")
     parser.add_argument("--summary", action="store_true", help="only print the result tables")
+    parser.add_argument("--details", action="store_true",
+                        help="list the false alarms and the missed poisons")
     args = parser.parse_args()
+
+    if args.details:
+        for path in (RESULTS_FILE, NO_LAYER1_FILE, QUICK_FILE):
+            if os.path.exists(path):
+                details(path)
+                return
+        sys.exit("No benchmark results found yet.")
 
     if args.summary:
         for path in (RESULTS_FILE, NO_LAYER1_FILE, QUICK_FILE):

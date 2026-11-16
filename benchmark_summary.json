@@ -18,6 +18,10 @@
       "alerts": 0,
       "total": 108
     },
+    "layers": {
+      "alerts": 5,
+      "total": 108
+    },
     "any": {
       "alerts": 5,
       "total": 108
@@ -40,6 +44,10 @@
         "total": 107
       },
       "integrity": {
+        "alerts": 107,
+        "total": 107
+      },
+      "layers": {
         "alerts": 107,
         "total": 107
       },
@@ -67,6 +75,10 @@
         "alerts": 85,
         "total": 85
       },
+      "layers": {
+        "alerts": 84,
+        "total": 85
+      },
       "any": {
         "alerts": 85,
         "total": 85
@@ -88,6 +100,10 @@
         "total": 107
       },
       "integrity": {
+        "alerts": 107,
+        "total": 107
+      },
+      "layers": {
         "alerts": 107,
         "total": 107
       },
@@ -120,6 +136,8 @@
     "layer2": 25.8,
     "layer3": 63.75,
     "integrity": 0.03,
-    "answer generation": 1141.5
+    "answer generation": 1141.5,
+    "local checks": 89.92,
+    "all checks": 965.62
   }
 }
