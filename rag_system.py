@@ -124,6 +124,7 @@ def build_rag_system():
     )
 
     return {
+        "vectorstore": vectorstore,
         "retriever": vectorstore.as_retriever(search_kwargs={"k": TOP_K}),
         "llm": llm,
         "approved": load_baseline(),
@@ -150,11 +151,14 @@ def generate_answer(llm, question, chunk_texts):
     return _response_text(llm.invoke(prompt))
 
 
-def ask_question(system, question, verbose=True):
+def ask_question(system, question, verbose=True, generate=True, use_layer1=True):
     """Retrieve, run every check, and answer only if all checks pass.
 
     Returns a dictionary of results so the benchmark and the web app can use
     the same function as the interactive prompt.
+
+    generate=False    run the checks but do not write an answer (benchmark)
+    use_layer1=False  skip Layer 1, the only check that calls Gemini (benchmark)
     """
     # 1. Retrieve
     docs = system["retriever"].invoke(question)
@@ -162,7 +166,10 @@ def ask_question(system, question, verbose=True):
 
     # 2. Check (each check is timed so the benchmark can report latency)
     t0 = time.perf_counter()
-    layer1_ok, layer1_reason = check_consistency(chunk_texts, auditor_llm)
+    if use_layer1:
+        layer1_ok, layer1_reason = check_consistency(chunk_texts, auditor_llm)
+    else:
+        layer1_ok, layer1_reason = True, "skipped"
     t1 = time.perf_counter()
     layer2_ok, layer2_report = check_anomaly(
         chunk_texts, layer2_stats, embedder=layer2_embedder, question=question
@@ -175,11 +182,15 @@ def ask_question(system, question, verbose=True):
 
     # 3. Answer only if nothing was flagged
     blocked = not (layer1_ok and layer2_ok and layer3_ok and integrity_ok)
-    answer = None if blocked else generate_answer(system["llm"], question, chunk_texts)
+    if blocked or not generate:
+        answer = None
+    else:
+        answer = generate_answer(system["llm"], question, chunk_texts)
 
     result = {
         "question": question,
         "chunks": chunk_texts,
+        "layer1_ran": use_layer1,
         "layer1_ok": layer1_ok,
         "layer1_reason": layer1_reason,
         "layer2_ok": layer2_ok,
@@ -232,7 +243,7 @@ def print_result(r):
 
     if r["blocked"]:
         print("\nAnswer withheld: at least one check raised an alert.")
-    else:
+    elif r["answer"] is not None:
         print("\nAnswer:", r["answer"])
 
     print("\nPassages retrieved:")
