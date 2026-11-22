@@ -1,19 +1,3 @@
-"""
-RAG-Shield pipeline: retrieve -> check -> answer.
-
-For every question the system:
-  1. retrieves the top passages from the vector store
-  2. runs every check on those passages
-       Layer 1    contradiction between passages        (defense.py)
-       Layer 2    corpus distance and question echo     (defense2b.py)
-       Layer 3    classifier: written like a poison?    (defense3.py)
-       Integrity  passage is in the approved baseline   (integrity.py)
-  3. generates an answer ONLY if every check passes
-
-If any check raises an alert, no answer is generated, so poisoned content
-never reaches the language model that writes the answer.
-"""
-
 import logging
 import os
 import time
